@@ -1,5 +1,5 @@
 @startuml
-interface Animal {
+interface Cry {
     + {abstract} String cry()
 }
 abstract class Pet {
@@ -18,7 +18,7 @@ class Person {
    - List<Pet> pets
    + void call(Pet pet)
 }
-Animal <|.. Pet :implements
+Cry <|.. Pet :implements
 Pet <|-- Cat :extends
 Pet <|-- Dog :extends
 Person "1" *--> "many" Pet :has
