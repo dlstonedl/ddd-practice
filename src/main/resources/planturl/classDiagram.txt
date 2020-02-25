@@ -1,0 +1,25 @@
+@startuml
+interface Animal {
+    + {abstract} String cry()
+}
+abstract class Pet {
+   - Person master
+   + {abstract} String cry()
+}
+class Cat {
+   - Person master
+   + String cry()
+}
+class Dog {
+   - Person master
+   + String cry()
+}
+class Person {
+   - List<Pet> pets
+   + void call(Pet pet)
+}
+Animal <|.. Pet :implements
+Pet <|-- Cat :extends
+Pet <|-- Dog :extends
+Person "1" *--> "many" Pet :has
+@enduml
