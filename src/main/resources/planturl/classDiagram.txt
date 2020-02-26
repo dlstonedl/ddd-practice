@@ -1,25 +1,83 @@
 @startuml
-interface Cry {
-    + {abstract} String cry()
+namespace 示例 {
+  package com.pet {
+    interface Cry {
+        + {abstract} String cry()
+    }
+    abstract class Pet {
+       - Person master
+       + {abstract} String cry()
+    }
+    class Cat {
+       - Person master
+       + String cry()
+    }
+    class Dog {
+       - Person master
+       + String cry()
+    }
+    Cry <|.. Pet :implements
+    Pet <|-- Cat :extends
+    Pet <|-- Dog :extends
+  }
+  package com.person {
+    class Person {
+       - List<Pet> pets
+       + void call(Pet pet)
+    }
+    Person "1" *-> "many" Pet :has
+  }
 }
-abstract class Pet {
-   - Person master
-   + {abstract} String cry()
+
+namespace 关联 {
+  class Customer {
+    - address :Address
+  }
+  class Address
+  Customer ->  Address :has
+  note top on link
+    拥有关系
+    成员变量，带箭头的直线表示
+  end note
 }
-class Cat {
-   - Person master
-   + String cry()
+
+namespace 聚合 {
+  class Engine
+  class Car {
+    - engine :Engine
+  }
+  Car o-> Engine :has a
+  note top on link
+    整体与部分关系
+    部分可以脱离整体而单独存在
+    成员变量,带空心菱形和箭头的直线表示
+  end note
 }
-class Dog {
-   - Person master
-   + String cry()
+关联 --[hidden] 聚合
+
+namespace 组合 {
+  class Head{
+    - mouth :Mouth
+  }
+  class Mouth
+  Head *-> Mouth :contain a
+  note top on link
+    整体与部分关系
+    部分不能脱离整体而单独存在
+    成员变量，带实心菱形和箭头的直线表示
+  end note
 }
-class Person {
-   - List<Pet> pets
-   + void call(Pet pet)
+聚合 --[hidden] 组合
+
+namespace 依赖 {
+  class Driver {
+    + drive(Car car) :void
+  }
+  class Car
+  Driver .> Car
+  note top on link
+    函数参数/返回值，静态方法调用
+    带有箭头的虚线表示
+  end note
 }
-Cry <|.. Pet :implements
-Pet <|-- Cat :extends
-Pet <|-- Dog :extends
-Person "1" *--> "many" Pet :has
 @enduml
