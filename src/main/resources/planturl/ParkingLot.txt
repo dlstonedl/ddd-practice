@@ -1,0 +1,19 @@
+@startuml
+
+class ParkingLot <<Entity>> <<Aggregate Root>>{
+  - ParkingLotId id
+  - int position
+  + Ticket park(Car car)
+  + Car take(Ticket ticket)
+}
+class Ticket <<Value Object>> {
+  + boolean isValid()
+}
+class Car <<Value Object>> {
+ - String plateNumber
+}
+ParkingLot "1" *--> "*" Ticket
+Ticket -> Car
+ParkingLot ..> Car
+
+@enduml
