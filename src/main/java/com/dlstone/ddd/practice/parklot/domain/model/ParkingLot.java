@@ -1,5 +1,6 @@
 package com.dlstone.ddd.practice.parklot.domain.model;
 
+import com.dlstone.ddd.practice.common.ParkingLotException;
 import com.dlstone.ddd.practice.common.ParkingLotId;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -13,9 +14,10 @@ public class ParkingLot {
     private final int capacity;
     private Map<Ticket, Car> ticketCarMap = new HashMap<>();
 
-    public Ticket park(Car car) {
+    public Ticket park(Car car) throws ParkingLotException {
         if (!available()) {
-            return null;
+            log.error("{} lot not available, capacity is {} , car is {}", id, capacity, car);
+            throw new ParkingLotException("parking lot not available");
         }
 
         Ticket ticket = new Ticket(car.getId(), id);
@@ -23,9 +25,10 @@ public class ParkingLot {
         return ticket;
     }
 
-    public Car take(Ticket ticket) {
+    public Car take(Ticket ticket) throws ParkingLotException {
         if (!validateTicket(ticket)) {
-            return null;
+            log.error("invalid ticket: {} in {} lot", ticket, id);
+            throw new ParkingLotException("invalid ticket");
         }
 
         return ticketCarMap.get(ticket);
