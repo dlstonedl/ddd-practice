@@ -1,6 +1,6 @@
 package com.dlstone.ddd.practice.parklot.domain.model;
 
-import com.dlstone.ddd.practice.parklot.common.CarId;
+import com.dlstone.ddd.practice.common.CarId;
 import lombok.ToString;
 import lombok.Value;
 
