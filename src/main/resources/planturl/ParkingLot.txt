@@ -1,5 +1,14 @@
 @startuml
 
+class ParkingBoy {
+ + ParkingLot select(List<ParkingLot> lots)
+}
+ParkingBoy o--> ParkingLot
+class ParkLotRule {
+ + List<ParkingLot> sort(List<ParkingLot> lots)
+}
+ParkingBoy -> ParkLotRule
+ParkLotRule -> ParkingLot
 class ParkingLot <<Entity>> <<Aggregate Root>>{
   - ParkingLotId id
   - int position
@@ -7,7 +16,7 @@ class ParkingLot <<Entity>> <<Aggregate Root>>{
   + Car take(Ticket ticket)
 }
 class Ticket <<Value Object>> {
-  + boolean isValid()
+  + boolean validate()
 }
 class Car <<Value Object>> {
  - String plateNumber
