@@ -9,4 +9,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public abstract class AbstractIdentity implements Identity {
     private final String value;
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "{" +
+            "value='" + value + '\'' +
+            '}';
+    }
 }
