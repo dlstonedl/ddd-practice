@@ -1,4 +1,4 @@
-package com.dlstone.ddd.practice.common;
+package com.dlstone.ddd.practice.parklot.common.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

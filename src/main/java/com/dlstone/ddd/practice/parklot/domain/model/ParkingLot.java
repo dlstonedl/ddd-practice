@@ -1,6 +1,6 @@
 package com.dlstone.ddd.practice.parklot.domain.model;
 
-import com.dlstone.ddd.practice.common.ParkingLotException;
+import com.dlstone.ddd.practice.parklot.common.exception.ParkingLotException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 

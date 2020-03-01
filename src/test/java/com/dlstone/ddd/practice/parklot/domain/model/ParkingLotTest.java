@@ -1,6 +1,6 @@
 package com.dlstone.ddd.practice.parklot.domain.model;
 
-import com.dlstone.ddd.practice.common.ParkingLotException;
+import com.dlstone.ddd.practice.parklot.common.exception.ParkingLotException;
 import org.junit.Test;
 
 import java.util.HashMap;

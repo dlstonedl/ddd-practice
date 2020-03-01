@@ -1,4 +1,4 @@
-package com.dlstone.ddd.practice.common;
+package com.dlstone.ddd.practice.parklot.common.exception;
 
 public class ParkingLotException extends Exception {
 
