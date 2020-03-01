@@ -4,5 +4,5 @@ public interface ParkingBoyRepository {
 
     ParkingBoy getParkingBoy();
 
-    void saveParkingBoy();
+    void saveParkingBoy(ParkingBoy parkingBoy);
 }

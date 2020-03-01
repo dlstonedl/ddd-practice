@@ -1,18 +1,16 @@
 package com.dlstone.ddd.practice.parklot.infrastructure;
 
-import com.dlstone.ddd.practice.parklot.domain.model.ParkingBoy;
-import com.dlstone.ddd.practice.parklot.domain.model.ParkingBoyRepository;
+import com.dlstone.ddd.practice.parklot.domain.model.*;
 
 public class ParkingBoyRepositoryImpl implements ParkingBoyRepository {
 
     @Override
     public ParkingBoy getParkingBoy() {
-        return null;
+        return ParkingBoyStore.INSTANCE.getParkingBoy();
     }
 
     @Override
-    public void saveParkingBoy() {
-
+    public void saveParkingBoy(ParkingBoy parkingBoy) {
+        ParkingBoyStore.INSTANCE.setParkingBoy(parkingBoy);
     }
-
 }
