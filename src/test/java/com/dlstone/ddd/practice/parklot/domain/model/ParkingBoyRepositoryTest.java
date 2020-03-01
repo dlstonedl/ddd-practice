@@ -1,8 +1,6 @@
-package com.dlstone.ddd.practice.parklot.infrastructure;
+package com.dlstone.ddd.practice.parklot.domain.model;
 
-import com.dlstone.ddd.practice.parklot.domain.model.ParkingBoy;
-import com.dlstone.ddd.practice.parklot.domain.model.ParkingBoyId;
-import com.dlstone.ddd.practice.parklot.domain.model.ParkingBoyRepository;
+import com.dlstone.ddd.practice.parklot.infrastructure.ParkingBoyRepositoryImpl;
 import org.junit.Before;
 import org.junit.Test;
 
