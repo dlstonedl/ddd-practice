@@ -1,0 +1,35 @@
+@startuml
+
+Class ParkingBoy << Entity >> {
+  ParkingLot[] parkingLots
+
+  + Ticket park(Car car)
+  + Car take(Ticket ticket)
+
+  + void setParkingLots (ParkingLot[] parkingLots)
+  + ParkingLot[] getParkingLots()
+}
+
+
+class ParkingLot << Entity >> {
+  int capacity
+  Map <Ticket, Car> parkedCars
+
+  + Ticket park(Car car)
+  + Car take(Ticket ticket)
+}
+
+
+Class Car << Value Object >> {
+    PlateNumber plateNumber
+}
+
+Class Ticket << Value Object >> {
+  + Boolean validate()
+}
+
+Ticket "1" *--> "1" Car
+ParkingLot "1" o--> "0..many" Ticket
+ParkingBoy "1" o--> "0..many" ParkingLot
+
+@enduml
