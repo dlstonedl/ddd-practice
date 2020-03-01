@@ -14,10 +14,10 @@ public class Client {
         Car car = new Car(new CarId("粤B000TA"));
 
         Ticket ticket = park(car);
-        log.info("park ticket is {}", ticket);
+        log.info("park ticket: {}", ticket);
 
         Car takeCar = take(ticket);
-        log.info("take car {}", takeCar);
+        log.info("take car: {}", takeCar);
     }
 
     private static Ticket park(Car car) {

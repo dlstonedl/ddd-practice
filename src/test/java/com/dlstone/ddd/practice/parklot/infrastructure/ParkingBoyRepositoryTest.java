@@ -30,7 +30,4 @@ public class ParkingBoyRepositoryTest {
         ParkingBoy boy = parkingBoyRepository.getParkingBoy();
         assertEquals(parkingBoy, boy);
     }
-
-
-
 }
