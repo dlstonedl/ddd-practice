@@ -1,6 +1,7 @@
 # ddd-practice
 
 ### RUN
+构建工具：Gradle
 主类： Client
 
 ### 包说明

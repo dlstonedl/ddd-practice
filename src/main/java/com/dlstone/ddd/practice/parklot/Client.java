@@ -5,6 +5,10 @@ import com.dlstone.ddd.practice.parklot.domain.model.*;
 import com.dlstone.ddd.practice.parklot.infrastructure.ParkingBoyRepositoryImpl;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 public class Client {
 
@@ -18,6 +22,21 @@ public class Client {
 
         Car takeCar = take(ticket);
         log.info("take car: {}", takeCar);
+
+        manageParkingLots();
+    }
+
+    private static void manageParkingLots() {
+        ParkingBoy parkingBoy = parkingBoyRepository.getParkingBoy();
+
+        List<ParkingLot> parkingLots = parkingBoy.getParkingLots();
+        List<ParkingLot> sortParkingLots = parkingLots
+            .stream()
+            .sorted(Comparator.comparing(parkingLot -> parkingLot.getId().getValue()))
+            .collect(Collectors.toList());
+        parkingBoy.setParkingLots(sortParkingLots);
+
+        parkingBoyRepository.saveParkingBoy(parkingBoy);
     }
 
     private static Ticket park(Car car) throws ParkingLotException {
