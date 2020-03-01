@@ -2,6 +2,7 @@ package com.dlstone.ddd.practice.parklot.domain.model;
 
 import com.dlstone.ddd.practice.parklot.common.exception.ParkingLotException;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -9,6 +10,7 @@ import java.util.*;
 @Data
 @Slf4j
 public class ParkingLot {
+    @EqualsAndHashCode.Include
     private final ParkingLotId id;
     private final int capacity;
     private Map<Ticket, Car> ticketCarMap = new HashMap<>();

@@ -20,7 +20,7 @@ public class Client {
         log.info("take car: {}", takeCar);
     }
 
-    private static Ticket park(Car car) {
+    private static Ticket park(Car car) throws ParkingLotException {
         ParkingBoy parkingBoy = parkingBoyRepository.getParkingBoy();
         Ticket ticket = parkingBoy.park(car);
         parkingBoyRepository.saveParkingBoy(parkingBoy);
