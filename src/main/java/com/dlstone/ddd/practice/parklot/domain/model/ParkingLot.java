@@ -32,7 +32,7 @@ public class ParkingLot {
             throw new ParkingLotException("invalid ticket");
         }
 
-        return ticketCarMap.get(ticket);
+        return ticketCarMap.remove(ticket);
     }
 
     private boolean validateTicket(Ticket ticket) {

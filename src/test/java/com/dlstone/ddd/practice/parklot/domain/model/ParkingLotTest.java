@@ -18,6 +18,7 @@ public class ParkingLotTest {
         Ticket ticket = new Ticket(new CarId("粤B000TA"), new ParkingLotId("1"));
 
         assertEquals(ticket, parkTicket);
+        assertEquals(1, parkingLot.getTicketCarMap().size());
     }
 
     @Test(expected = ParkingLotException.class)
@@ -43,6 +44,7 @@ public class ParkingLotTest {
 
         Car takeCar = parkingLot.take(ticket);
         assertEquals(car, takeCar);
+        assertEquals(0, parkingLot.getTicketCarMap().size());
     }
 
     @Test(expected = ParkingLotException.class)
