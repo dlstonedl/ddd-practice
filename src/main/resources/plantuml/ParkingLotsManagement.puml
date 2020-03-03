@@ -1,15 +1,28 @@
 @startuml
 
-Class ParkingBoy << Entity >> {
-  ParkingLot[] parkingLots
+class ParkingBoy << Entity >> {
+  List<ParkingLot> parkingLots
 
   + Ticket park(Car car)
-  + Car take(Ticket ticket)
+  + ParkingLot getParkingLot(Ticket ticket)
 
-  + void setParkingLots (ParkingLot[] parkingLots)
-  + ParkingLot[] getParkingLots()
+  + void setParkingLots (List<ParkingLot> parkingLots)
+  + List<ParkingLot> getParkingLots()
 }
 
+interface ParkingBoyRepository {
+  ParkingBoy getParkingBoy()
+  void saveParkingBoy(ParkingBoy parkingBoy)
+}
+
+class ParkingBoyRepositoryImpl {
+  + ParkingBoy getParkingBoy()
+  + void saveParkingBoy(ParkingBoy parkingBoy)
+}
+
+ParkingBoyRepository <|.. ParkingBoyRepositoryImpl
+
+ParkingBoyRepository -> ParkingBoy
 
 class ParkingLot << Entity >> {
   int capacity
@@ -25,7 +38,6 @@ Class Car << Value Object >> {
 }
 
 Class Ticket << Value Object >> {
-  + Boolean validate()
 }
 
 Ticket "1" *--> "1" Car
