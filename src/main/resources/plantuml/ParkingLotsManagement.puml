@@ -3,26 +3,10 @@
 class ParkingBoy << Entity >> {
   List<ParkingLot> parkingLots
 
-  + Ticket park(Car car)
-  + ParkingLot getParkingLot(Ticket ticket)
-
+  + ParkingLot getParkingLot()
   + void setParkingLots (List<ParkingLot> parkingLots)
   + List<ParkingLot> getParkingLots()
 }
-
-interface ParkingBoyRepository {
-  ParkingBoy getParkingBoy()
-  void saveParkingBoy(ParkingBoy parkingBoy)
-}
-
-class ParkingBoyRepositoryImpl {
-  + ParkingBoy getParkingBoy()
-  + void saveParkingBoy(ParkingBoy parkingBoy)
-}
-
-ParkingBoyRepository <|.. ParkingBoyRepositoryImpl
-
-ParkingBoyRepository -> ParkingBoy
 
 class ParkingLot << Entity >> {
   int capacity
@@ -30,8 +14,8 @@ class ParkingLot << Entity >> {
 
   + Ticket park(Car car)
   + Car take(Ticket ticket)
+  + boolean available()
 }
-
 
 Class Car << Value Object >> {
     PlateNumber plateNumber
