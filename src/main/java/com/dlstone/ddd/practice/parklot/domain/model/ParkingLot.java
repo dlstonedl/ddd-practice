@@ -15,10 +15,9 @@ public class ParkingLot {
     private final int capacity;
     private Map<Ticket, Car> ticketCarMap = new HashMap<>();
 
-    public Ticket park(Car car) throws ParkingLotException {
+    public Ticket park(Car car) {
         if (!available()) {
-            log.error("{} lot not available, capacity is {} , car is {}", id, capacity, car);
-            throw new ParkingLotException("parking lot not available");
+            return null;
         }
 
         Ticket ticket = new Ticket(car.getId(), id);
@@ -26,10 +25,9 @@ public class ParkingLot {
         return ticket;
     }
 
-    public Car take(Ticket ticket) throws ParkingLotException {
+    public Car take(Ticket ticket) {
         if (!validateTicket(ticket)) {
-            log.error("invalid ticket: {} in {} lot", ticket, id);
-            throw new ParkingLotException("invalid ticket");
+            return null;
         }
 
         return ticketCarMap.remove(ticket);
@@ -39,7 +37,7 @@ public class ParkingLot {
         return ticketCarMap.containsKey(ticket);
     }
 
-    private boolean available() {
+    protected boolean available() {
         return capacity > ticketCarMap.size();
     }
 }

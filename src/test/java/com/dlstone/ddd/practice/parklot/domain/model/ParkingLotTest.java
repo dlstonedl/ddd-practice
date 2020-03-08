@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class ParkingLotTest {
 
@@ -21,15 +22,16 @@ public class ParkingLotTest {
         assertEquals(1, parkingLot.getTicketCarMap().size());
     }
 
-    @Test(expected = ParkingLotException.class)
-    public void should_throw_exception_when_park_lot_not_available() throws ParkingLotException {
+    @Test
+    public void should_return_null_when_park_lot_not_available() throws ParkingLotException {
         Map<Ticket, Car> ticketCarMap = new HashMap<>();
         ticketCarMap.put(new Ticket(new CarId("粤B000TA"), new ParkingLotId("1")), new Car(new CarId("粤B000TA")));
 
         ParkingLot parkingLot = new ParkingLot(new ParkingLotId("1"), 1);
         parkingLot.setTicketCarMap(ticketCarMap);
 
-        parkingLot.park(new Car(new CarId("粤B000TB")));
+        Ticket ticket = parkingLot.park(new Car(new CarId("粤B000TB")));
+        assertNull(ticket);
     }
 
     @Test
@@ -47,11 +49,12 @@ public class ParkingLotTest {
         assertEquals(0, parkingLot.getTicketCarMap().size());
     }
 
-    @Test(expected = ParkingLotException.class)
-    public void should_throw_exception_when_ticket_is_invalid() throws ParkingLotException {
+    @Test
+    public void should_return_null_when_ticket_is_invalid() throws ParkingLotException {
         Ticket ticket = new Ticket(new CarId("粤B000TA"), new ParkingLotId("1"));
         ParkingLot parkingLot = new ParkingLot(new ParkingLotId("1"), 1);
-        parkingLot.take(ticket);
+        Car car = parkingLot.take(ticket);
+        assertNull(car);
     }
 
 }
