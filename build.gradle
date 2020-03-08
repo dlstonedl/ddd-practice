@@ -25,3 +25,11 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'junit:junit:4.12'
 }
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
