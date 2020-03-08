@@ -1,14 +1,25 @@
 @startuml
 
 class ParkingBoy << Entity >> {
+  ParkingBoyId id
   List<ParkingLot> parkingLots
 
-  + ParkingLot getParkingLot()
+  + ParkingLot selectParkingLot()
   + void setParkingLots (List<ParkingLot> parkingLots)
   + List<ParkingLot> getParkingLots()
 }
 
+interface Strategy {
+  ParkingLot selectParkingLot(List<ParkingLot> parkingLots)
+}
+class SortedStrategy
+class MaxIdleStrategy
+Strategy <|.. SortedStrategy
+Strategy <|.. MaxIdleStrategy
+ParkingBoy -> Strategy
+
 class ParkingLot << Entity >> {
+  ParkingLotId id
   int capacity
   Map <Ticket, Car> parkedCars
 
@@ -18,7 +29,7 @@ class ParkingLot << Entity >> {
 }
 
 Class Car << Value Object >> {
-    PlateNumber plateNumber
+    CarId id
 }
 
 Class Ticket << Value Object >> {
