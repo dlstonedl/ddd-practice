@@ -1,5 +1,13 @@
 @startuml
 
+class ParkingManager {
+  List<ParkingBoy> parkingBoys
+
+  + ParkingLot selectParkingLot()
+}
+
+ParkingManager "1" o--> "0...many" ParkingBoy
+
 class ParkingBoy << Entity >> {
   ParkingBoyId id
   List<ParkingLot> parkingLots
@@ -35,7 +43,7 @@ Class Car << Value Object >> {
 Class Ticket << Value Object >> {
 }
 
-Ticket "1" *--> "1" Car
+Ticket "1" --> "1" Car
 ParkingLot "1" o--> "0..many" Ticket
 ParkingBoy "1" o--> "0..many" ParkingLot
 
