@@ -12,7 +12,9 @@ class ParkingBoy << Entity >> {
   ParkingBoyId id
   List<ParkingLot> parkingLots
 
-  + ParkingLot selectParkingLot()
+  ParkingLot selectParkingLot()
+  boolean available()
+
   + void setParkingLots (List<ParkingLot> parkingLots)
   + List<ParkingLot> getParkingLots()
 }

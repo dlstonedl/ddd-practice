@@ -23,4 +23,12 @@ public class ParkingBoy {
             .collect(Collectors.toList());
         return strategy.selectParkingLot(availableParkingLots);
     }
+
+    boolean available() {
+        return this.parkingLots
+            .stream()
+            .filter(parkingLot -> parkingLot.availableLots() > 0)
+            .findAny()
+            .isPresent();
+    }
 }

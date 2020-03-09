@@ -44,4 +44,30 @@ public class ParkingBoyTest {
         assertEquals(parkingLot2, parkingLot);
     }
 
+    @Test
+    public void should_return_true_when_parking_boy_have_available_parking_lot() {
+        ParkingBoy parkingBoy = new ParkingBoy(new ParkingBoyId("boy1"));
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        ParkingLot parkingLot1 = new ParkingLot(new ParkingLotId("1"), 1);
+        parkingLots.add(parkingLot1);
+        parkingBoy.setParkingLots(parkingLots);
+
+        boolean available = parkingBoy.available();
+        assertTrue(available);
+    }
+
+    @Test
+    public void should_return_false_when_parking_boy_not_have_available_parking_lot() {
+        ParkingBoy parkingBoy = new ParkingBoy(new ParkingBoyId("boy1"));
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        Map<Ticket, Car> ticketCarMap = new HashMap<>();
+        ticketCarMap.put(new Ticket(new CarId("粤B000TA"), new ParkingLotId("1")), new Car(new CarId("粤B000TA")));
+        ParkingLot parkingLot1 = new ParkingLot(new ParkingLotId("1"), 1);
+        parkingLot1.setTicketCarMap(ticketCarMap);
+        parkingLots.add(parkingLot1);
+        parkingBoy.setParkingLots(parkingLots);
+
+        boolean available = parkingBoy.available();
+        assertFalse(available);
+    }
 }
