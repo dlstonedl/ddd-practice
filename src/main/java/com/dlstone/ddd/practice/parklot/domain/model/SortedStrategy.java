@@ -9,7 +9,7 @@ public class SortedStrategy implements Strategy {
     public ParkingLot selectParkingLot(List<ParkingLot> parkingLots) {
         return parkingLots
             .stream()
-            .filter(ParkingLot::available)
+            .filter(parkingLot -> parkingLot.availableLots() > 0)
             .sorted(Comparator.comparing(parkingLot -> parkingLot.getId().getValue()))
             .findFirst()
             .orElse(null);

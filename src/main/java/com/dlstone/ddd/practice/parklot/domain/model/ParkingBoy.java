@@ -16,7 +16,7 @@ public class ParkingBoy {
 
     public Ticket park(Car car) {
         return parkingLots.stream()
-            .filter(ParkingLot::available)
+            .filter(parkingLot -> parkingLot.availableLots() > 0)
             .findFirst()
             .map(parkingLot -> parkingLot.park(car))
             .orElse(null);

@@ -16,7 +16,7 @@ public class ParkingLot {
     private Map<Ticket, Car> ticketCarMap = new HashMap<>();
 
     public Ticket park(Car car) {
-        if (!available()) {
+        if (availableLots() <= 0) {
             return null;
         }
 
@@ -37,7 +37,7 @@ public class ParkingLot {
         return ticketCarMap.containsKey(ticket);
     }
 
-    protected boolean available() {
-        return capacity > ticketCarMap.size();
+    int availableLots() {
+        return capacity - ticketCarMap.size();
     }
 }
