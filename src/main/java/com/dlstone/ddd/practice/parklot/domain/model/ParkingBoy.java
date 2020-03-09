@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Slf4j
@@ -13,12 +14,13 @@ public class ParkingBoy {
     @EqualsAndHashCode.Include
     private final ParkingBoyId id;
     private List<ParkingLot> parkingLots = new ArrayList<>();
+    private Strategy strategy = new SortedStrategy();
 
-    public Ticket park(Car car) {
-        return parkingLots.stream()
+    ParkingLot selectParkingLot() {
+        List<ParkingLot> availableParkingLots = this.parkingLots
+            .stream()
             .filter(parkingLot -> parkingLot.availableLots() > 0)
-            .findFirst()
-            .map(parkingLot -> parkingLot.park(car))
-            .orElse(null);
+            .collect(Collectors.toList());
+        return strategy.selectParkingLot(availableParkingLots);
     }
 }

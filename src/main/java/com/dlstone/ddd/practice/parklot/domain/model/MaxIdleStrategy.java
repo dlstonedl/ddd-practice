@@ -9,7 +9,6 @@ public class MaxIdleStrategy implements Strategy {
     public ParkingLot selectParkingLot(List<ParkingLot> parkingLots) {
         return parkingLots
             .stream()
-            .filter(parkingLot -> parkingLot.availableLots() > 0)
             .sorted(Comparator.comparingInt(ParkingLot::availableLots).reversed())
             .findFirst()
             .orElse(null);

@@ -12,7 +12,7 @@ import static org.junit.Assert.assertNull;
 public class ParkingLotTest {
 
     @Test
-    public void should_return_ticket_when_park_lot_is_available() throws ParkingLotException {
+    public void should_return_ticket_when_park_lot_is_available() {
         Car car = new Car(new CarId("粤B000TA"));
         ParkingLot parkingLot = new ParkingLot(new ParkingLotId("1"), 3);
         Ticket parkTicket = parkingLot.park(car);
@@ -23,7 +23,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_return_null_when_park_lot_not_available() throws ParkingLotException {
+    public void should_return_null_when_park_lot_not_available() {
         Map<Ticket, Car> ticketCarMap = new HashMap<>();
         ticketCarMap.put(new Ticket(new CarId("粤B000TA"), new ParkingLotId("1")), new Car(new CarId("粤B000TA")));
 
@@ -35,7 +35,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_return_car_when_ticket_is_valid() throws ParkingLotException {
+    public void should_return_car_when_ticket_is_valid() {
         Ticket ticket = new Ticket(new CarId("粤B000TA"), new ParkingLotId("1"));
         Car car = new Car(new CarId("粤B000TA"));
 
@@ -50,7 +50,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_return_null_when_ticket_is_invalid() throws ParkingLotException {
+    public void should_return_null_when_ticket_is_invalid() {
         Ticket ticket = new Ticket(new CarId("粤B000TA"), new ParkingLotId("1"));
         ParkingLot parkingLot = new ParkingLot(new ParkingLotId("1"), 1);
         Car car = parkingLot.take(ticket);

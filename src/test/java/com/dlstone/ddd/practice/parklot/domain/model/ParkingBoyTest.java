@@ -13,32 +13,35 @@ import static org.junit.Assert.*;
 public class ParkingBoyTest {
 
     @Test
-    public void should_return_ticket_when_have_lot_available() throws ParkingLotException {
-        ParkingBoy parkingBoy = new ParkingBoy(new ParkingBoyId("boy1"));
+    public void should_return_parking_lot_when_is_junior_parking_boy() {
+        ParkingBoy JuniorParkingBoy = new ParkingBoy(new ParkingBoyId("boy1"));
         List<ParkingLot> parkingLots = new ArrayList<>();
-        parkingLots.add(new ParkingLot(new ParkingLotId("lot1"), 2));
-        parkingBoy.setParkingLots(parkingLots);
+        Map<Ticket, Car> ticketCarMap = new HashMap<>();
+        ticketCarMap.put(new Ticket(new CarId("粤B000TA"), new ParkingLotId("1")), new Car(new CarId("粤B000TA")));
+        ParkingLot parkingLot1 = new ParkingLot(new ParkingLotId("1"), 1);
+        parkingLot1.setTicketCarMap(ticketCarMap);
+        ParkingLot parkingLot2 = new ParkingLot(new ParkingLotId("2"), 3);
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+        JuniorParkingBoy.setParkingLots(parkingLots);
 
-        Car car = new Car(new CarId("粤B000TA"));
-        Ticket ticket = new Ticket(new CarId("粤B000TA"), new ParkingLotId("lot1"));
-        Ticket parkTicket = parkingBoy.park(car);
-        assertEquals(ticket, parkTicket);
+        ParkingLot parkingLot = JuniorParkingBoy.selectParkingLot();
+        assertEquals(parkingLot2, parkingLot);
     }
 
     @Test
-    public void should_return_null_when_no_lot_available() throws ParkingLotException {
-        Map<Ticket, Car> ticketCarMap = new HashMap<>();
-        ticketCarMap.put(new Ticket(new CarId("粤B000TA"), new ParkingLotId("lot1")), new Car(new CarId("粤B000TA")));
-        ParkingLot parkingLot = new ParkingLot(new ParkingLotId("lot1"), 1);
-        parkingLot.setTicketCarMap(ticketCarMap);
+    public void should_return_parking_lot_when_is_senior_parking_boy() {
+        ParkingBoy seniorParkingBoy = new ParkingBoy(new ParkingBoyId("boy1"));
         List<ParkingLot> parkingLots = new ArrayList<>();
-        parkingLots.add(parkingLot);
+        ParkingLot parkingLot1 = new ParkingLot(new ParkingLotId("1"), 1);
+        ParkingLot parkingLot2 = new ParkingLot(new ParkingLotId("2"), 3);
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+        seniorParkingBoy.setParkingLots(parkingLots);
+        seniorParkingBoy.setStrategy(new MaxIdleStrategy());
 
-        ParkingBoy parkingBoy = new ParkingBoy(new ParkingBoyId("boy1"));
-        parkingBoy.setParkingLots(parkingLots);
-
-        Car car = new Car(new CarId("粤B000TA"));
-        Ticket ticket = parkingBoy.park(car);
-        assertNull(ticket);
+        ParkingLot parkingLot = seniorParkingBoy.selectParkingLot();
+        assertEquals(parkingLot2, parkingLot);
     }
+
 }
