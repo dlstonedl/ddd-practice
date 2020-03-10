@@ -35,7 +35,7 @@ class ParkingLot << Entity >> {
 
   + Ticket park(Car car)
   + Car take(Ticket ticket)
-  + boolean available()
+  int availableLots()
 }
 
 Class Car << Value Object >> {
