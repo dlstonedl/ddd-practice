@@ -14,9 +14,7 @@ package config {
     ParkingStrategyName parkingStrategyName
   }
 
-  enum ParkingStrategyName {
-    String name
-  }
+  enum ParkingStrategyName
   ParkingLotConfig --> ParkingStrategyName
 }
 
