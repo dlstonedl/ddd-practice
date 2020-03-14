@@ -4,12 +4,13 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class ParkingManager {
     List<ParkingBoy> parkingBoys = new ArrayList<>();
 
-    ParkingLot selectParkingLot() {
+    public ParkingLot selectParkingLot() {
         return parkingBoys
             .stream()
             .filter(ParkingBoy::available)
@@ -18,4 +19,10 @@ public class ParkingManager {
             .orElse(null);
     }
 
+    public List<ParkingLot> getAvailableParkingLots() {
+        return this.parkingBoys
+            .stream()
+            .flatMap(parkingBoy -> parkingBoy.getAvailableParkingLots().stream())
+            .collect(Collectors.toList());
+    }
 }
