@@ -36,8 +36,10 @@ package parking {
     List<ParkingLot> parkingLots
 
     + ParkingLot selectParkingLot()
-    boolean available()
     + List<ParkingLot> getAvailableParkingLots()
+
+    boolean available()
+
   }
   ParkingLotConfig .> ParkingBoy
   note top on link
