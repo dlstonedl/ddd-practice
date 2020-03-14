@@ -1,12 +1,10 @@
 package com.dlstone.ddd.practice.parklot.domain.model.parking;
 
 import lombok.Value;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Value
 public class ParkingBoy {
     private final List<ParkingLot> parkingLots;

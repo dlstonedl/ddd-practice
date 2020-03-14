@@ -1,11 +1,9 @@
 package com.dlstone.ddd.practice.parklot.domain.model.parking;
 
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
-@Slf4j
 @Data
 public class ParkingLot {
     private final ParkingLotId id;

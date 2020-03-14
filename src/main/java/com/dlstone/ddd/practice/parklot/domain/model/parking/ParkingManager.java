@@ -1,18 +1,13 @@
 package com.dlstone.ddd.practice.parklot.domain.model.parking;
 
-import lombok.Data;
+import lombok.Value;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Data
+@Value
 public class ParkingManager {
-    List<ParkingBoy> parkingBoys = new ArrayList<>();
-
-    public ParkingManager(List<ParkingBoy> parkingBoys) {
-        this.parkingBoys = parkingBoys;
-    }
+    private final List<ParkingBoy> parkingBoys;
 
     public ParkingLot selectParkingLot() {
         return parkingBoys
