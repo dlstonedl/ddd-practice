@@ -12,7 +12,7 @@ public class ParkingBoy {
     private final List<ParkingLot> parkingLots;
     private final Strategy strategy;
 
-    ParkingLot selectParkingLot() {
+    public ParkingLot selectParkingLot() {
         List<ParkingLot> availableParkingLots = this.parkingLots
             .stream()
             .filter(parkingLot -> parkingLot.availableLots() > 0)
@@ -26,5 +26,12 @@ public class ParkingBoy {
             .filter(parkingLot -> parkingLot.availableLots() > 0)
             .findAny()
             .isPresent();
+    }
+
+    public List<ParkingLot> getAvailableParkingLots() {
+        return this.parkingLots
+            .stream()
+            .filter(parkingLot -> parkingLot.availableLots() > 0)
+            .collect(Collectors.toList());
     }
 }

@@ -64,4 +64,15 @@ public class ParkingBoyTest {
         boolean available = parkingBoy.available();
         assertFalse(available);
     }
+
+    @Test
+    public void should_return_parking_lots_when_get_available_parking_lots() {
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        ParkingLot parkingLot1 = new ParkingLot(new ParkingLotId("1"), 1);
+        parkingLots.add(parkingLot1);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new SortedStrategy());
+
+        List<ParkingLot> availableParkingLots = parkingBoy.getAvailableParkingLots();
+        assertEquals(1, availableParkingLots.size());
+    }
 }
