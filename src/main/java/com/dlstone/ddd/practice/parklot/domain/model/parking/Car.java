@@ -1,4 +1,4 @@
-package com.dlstone.ddd.practice.parklot.domain.model;
+package com.dlstone.ddd.practice.parklot.domain.model.parking;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

@@ -1,4 +1,4 @@
-package com.dlstone.ddd.practice.parklot.domain.model;
+package com.dlstone.ddd.practice.parklot.domain.model.parking;
 
 import com.dlstone.ddd.practice.parklot.common.model.AbstractIdentity;
 

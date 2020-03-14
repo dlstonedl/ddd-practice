@@ -1,4 +1,4 @@
-package com.dlstone.ddd.practice.parklot.domain.model;
+package com.dlstone.ddd.practice.parklot.domain.model.parking;
 
 import java.util.Comparator;
 import java.util.List;

@@ -1,6 +1,5 @@
-package com.dlstone.ddd.practice.parklot.domain.model;
+package com.dlstone.ddd.practice.parklot.domain.model.parking;
 
-import com.dlstone.ddd.practice.parklot.common.exception.ParkingLotException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
