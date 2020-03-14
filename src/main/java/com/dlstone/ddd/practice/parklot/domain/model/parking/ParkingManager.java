@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 public class ParkingManager {
     List<ParkingBoy> parkingBoys = new ArrayList<>();
 
+    public ParkingManager(List<ParkingBoy> parkingBoys) {
+        this.parkingBoys = parkingBoys;
+    }
+
     public ParkingLot selectParkingLot() {
         return parkingBoys
             .stream()

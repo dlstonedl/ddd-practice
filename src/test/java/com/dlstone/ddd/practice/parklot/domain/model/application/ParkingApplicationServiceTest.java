@@ -49,10 +49,9 @@ public class ParkingApplicationServiceTest {
         parkingLots.add(parkingLot1);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new SortedStrategy());
 
-        ParkingManager parkingManager = new ParkingManager();
         List<ParkingBoy> parkingBoys = new ArrayList<>();
         parkingBoys.add(parkingBoy);
-        parkingManager.setParkingBoys(parkingBoys);
+        ParkingManager parkingManager = new ParkingManager(parkingBoys);
 
         when(parkingManagerFactory.createParkingManager(any())).thenReturn(parkingManager);
         Car car = new Car(new CarId("粤B000TA"));
@@ -68,10 +67,9 @@ public class ParkingApplicationServiceTest {
         parkingLots.add(parkingLot1);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new SortedStrategy());
 
-        ParkingManager parkingManager = new ParkingManager();
         List<ParkingBoy> parkingBoys = new ArrayList<>();
         parkingBoys.add(parkingBoy);
-        parkingManager.setParkingBoys(parkingBoys);
+        ParkingManager parkingManager = new ParkingManager(parkingBoys);
 
         when(parkingManagerFactory.createParkingManager(any())).thenReturn(parkingManager);
 

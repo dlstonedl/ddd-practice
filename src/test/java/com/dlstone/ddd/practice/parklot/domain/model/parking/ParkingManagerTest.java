@@ -19,10 +19,10 @@ public class ParkingManagerTest {
         parkingLots.add(parkingLot1);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new SortedStrategy());
 
-        ParkingManager parkingManager = new ParkingManager();
         List<ParkingBoy> parkingBoys = new ArrayList<>();
         parkingBoys.add(parkingBoy);
-        parkingManager.setParkingBoys(parkingBoys);
+        ParkingManager parkingManager = new ParkingManager(parkingBoys);
+
 
         ParkingLot parkingLot = parkingManager.selectParkingLot();
         assertEquals(parkingLot1, parkingLot);
@@ -39,10 +39,9 @@ public class ParkingManagerTest {
 
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new SortedStrategy());
 
-        ParkingManager parkingManager = new ParkingManager();
         List<ParkingBoy> parkingBoys = new ArrayList<>();
         parkingBoys.add(parkingBoy);
-        parkingManager.setParkingBoys(parkingBoys);
+        ParkingManager parkingManager = new ParkingManager(parkingBoys);
 
         ParkingLot parkingLot = parkingManager.selectParkingLot();
         assertNull(parkingLot);
@@ -55,10 +54,10 @@ public class ParkingManagerTest {
         parkingLots.add(parkingLot1);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new SortedStrategy());
 
-        ParkingManager parkingManager = new ParkingManager();
         List<ParkingBoy> parkingBoys = new ArrayList<>();
         parkingBoys.add(parkingBoy);
-        parkingManager.setParkingBoys(parkingBoys);
+        ParkingManager parkingManager = new ParkingManager(parkingBoys);
+
         List<ParkingLot> availableParkingLots = parkingManager.getAvailableParkingLots();
         assertEquals(1, availableParkingLots.size());
     }
