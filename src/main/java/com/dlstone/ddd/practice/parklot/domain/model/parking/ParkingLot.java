@@ -5,12 +5,17 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
-@Data
 @Slf4j
+@Data
 public class ParkingLot {
     private final ParkingLotId id;
-    private final int capacity;
+    private int capacity;
     private Map<Ticket, Car> ticketCarMap = new HashMap<>();
+
+    public ParkingLot(ParkingLotId id, int capacity) {
+        this.id = id;
+        this.capacity = capacity;
+    }
 
     public Ticket park(Car car) {
         if (availableLots() <= 0) {
