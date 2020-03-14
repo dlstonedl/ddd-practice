@@ -1,52 +1,77 @@
 @startuml
 
-class ParkingManager {
-  List<ParkingBoy> parkingBoys
+package config {
+  class ParkingManagerConfig <<Entity>> <<Aggregate Root>> {
+     ParkingManagerId id
+     List<ParkingBoyId> parkingBoyIds
+  }
 
-  + ParkingLot selectParkingLot()
+  ParkingManagerConfig --[hidden] ParkingLotConfig
+
+  class ParkingLotConfig <<Entity>> <<Aggregate Root>> {
+    ParkingBoyId id
+    List<ParkingLotId> parkingLotIds
+    ParkingStrategyName parkingStrategyName
+  }
+
+  enum ParkingStrategyName {
+    String name
+  }
+  ParkingLotConfig --> ParkingStrategyName
 }
 
-ParkingManager "1" o--> "0...many" ParkingBoy
 
-class ParkingBoy << Entity >> {
-  ParkingBoyId id
-  List<ParkingLot> parkingLots
+package parking {
+  class ParkingManager <<Value Object>> {
+    List<ParkingBoy> parkingBoys
 
-  ParkingLot selectParkingLot()
-  boolean available()
+    + ParkingLot selectParkingLot()
+  }
+  ParkingManagerConfig .> ParkingManager
+  note top on link
+    translate
+  end note
+  ParkingManager  "1" o--> "many" ParkingBoy
 
-  + void setParkingLots (List<ParkingLot> parkingLots)
-  + List<ParkingLot> getParkingLots()
+  class ParkingBoy <<Value Object>> {
+    List<ParkingLot> parkingLots
+
+    ParkingLot selectParkingLot()
+    boolean available()
+  }
+  ParkingLotConfig .> ParkingBoy
+  note top on link
+    translate
+  end note
+
+  interface Strategy {
+    ParkingLot selectParkingLot(List<ParkingLot> parkingLots)
+  }
+  class SortedStrategy
+  class MaxIdleStrategy
+  Strategy <|.. SortedStrategy
+  Strategy <|.. MaxIdleStrategy
+  ParkingBoy -> Strategy
+
+  class ParkingLot <<Entity>> <<Aggregate Root>> {
+    ParkingLotId id
+    int capacity
+    Map <Ticket, Car> parkedCars
+
+    + Ticket park(Car car)
+    + Car take(Ticket ticket)
+    int availableLots()
+  }
+
+  Class Car <<Value Object>> {
+      CarId id
+  }
+
+  Class Ticket <<Value Object>> {
+  }
+
+  Ticket "1" --> "1" Car
+  ParkingLot "1" o--> "many" Ticket
+  ParkingBoy "1" o--> "many" ParkingLot
 }
-
-interface Strategy {
-  ParkingLot selectParkingLot(List<ParkingLot> parkingLots)
-}
-class SortedStrategy
-class MaxIdleStrategy
-Strategy <|.. SortedStrategy
-Strategy <|.. MaxIdleStrategy
-ParkingBoy -> Strategy
-
-class ParkingLot << Entity >> {
-  ParkingLotId id
-  int capacity
-  Map <Ticket, Car> parkedCars
-
-  + Ticket park(Car car)
-  + Car take(Ticket ticket)
-  int availableLots()
-}
-
-Class Car << Value Object >> {
-    CarId id
-}
-
-Class Ticket << Value Object >> {
-}
-
-Ticket "1" --> "1" Car
-ParkingLot "1" o--> "0..many" Ticket
-ParkingBoy "1" o--> "0..many" ParkingLot
-
 @enduml
