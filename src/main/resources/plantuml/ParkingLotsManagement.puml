@@ -24,6 +24,7 @@ package parking {
     List<ParkingBoy> parkingBoys
 
     + ParkingLot selectParkingLot()
+    + List<ParkingLot> getAvailableParkingLots()
   }
   ParkingManagerConfig .> ParkingManager
   note top on link
@@ -34,8 +35,9 @@ package parking {
   class ParkingBoy <<Value Object>> {
     List<ParkingLot> parkingLots
 
-    ParkingLot selectParkingLot()
+    + ParkingLot selectParkingLot()
     boolean available()
+    + List<ParkingLot> getAvailableParkingLots()
   }
   ParkingLotConfig .> ParkingBoy
   note top on link
