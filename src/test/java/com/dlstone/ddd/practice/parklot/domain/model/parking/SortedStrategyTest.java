@@ -1,9 +1,5 @@
 package com.dlstone.ddd.practice.parklot.domain.model.parking;
 
-import com.dlstone.ddd.practice.parklot.domain.model.parking.ParkingLot;
-import com.dlstone.ddd.practice.parklot.domain.model.parking.ParkingLotId;
-import com.dlstone.ddd.practice.parklot.domain.model.parking.SortedStrategy;
-import com.dlstone.ddd.practice.parklot.domain.model.parking.Strategy;
 import org.junit.Test;
 
 import java.util.ArrayList;

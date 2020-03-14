@@ -1,6 +1,5 @@
 package com.dlstone.ddd.practice.parklot.domain.model.parking;
 
-import com.dlstone.ddd.practice.parklot.domain.model.parking.*;
 import org.junit.Test;
 
 import java.util.HashMap;
