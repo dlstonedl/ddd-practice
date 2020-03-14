@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 public class ParkingManagerConfig {
     private final ParkingManagerId id;
-    private List<ParkingBoyConfigId> parkingBoyConfigIds = new ArrayList<>();
+    private List<ParkingBoyId> parkingBoyIds = new ArrayList<>();
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class ParkingBoyConfig {
-    private final ParkingBoyConfigId id;
+    private final ParkingBoyId id;
     private List<ParkingLotId> parkingLotIds;
     private ParkingStrategyName parkingStrategyName;
 }
