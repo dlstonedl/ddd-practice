@@ -4,8 +4,8 @@ import com.dlstone.ddd.practice.parklot.application.ParkingApplicationService;
 import com.dlstone.ddd.practice.parklot.domain.model.config.ParkingBoyId;
 import com.dlstone.ddd.practice.parklot.domain.model.parking.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +20,14 @@ public class ParkingApplicationServiceTest {
     private ParkingApplicationService parkingApplicationService;
     private ParkingBoyFactory parkingBoyFactory;
     private ParkingManagerFactory parkingManagerFactory;
+    private ParkingLotRepository parkingLotRepository;
 
     @Before
     public void setUp() {
         parkingBoyFactory = mock(ParkingBoyFactory.class);
         parkingManagerFactory = mock(ParkingManagerFactory.class);
-        parkingApplicationService = new ParkingApplicationService(parkingBoyFactory, parkingManagerFactory);
+        parkingLotRepository = mock(ParkingLotRepository.class);
+        parkingApplicationService = new ParkingApplicationService(parkingBoyFactory, parkingManagerFactory, parkingLotRepository);
     }
 
     @Test
@@ -35,6 +37,7 @@ public class ParkingApplicationServiceTest {
         parkingLots.add(parkingLot1);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new SortedStrategy());
         when(parkingBoyFactory.createParkingBoy(any())).thenReturn(parkingBoy);
+        Mockito.doNothing().when(parkingLotRepository).updateParkingLot(any());
 
         Car car = new Car(new CarId("粤B000TA"));
         Ticket ticket = parkingApplicationService.parkWithParkingBoy(new ParkingBoyId("boy1"), car);
@@ -54,6 +57,8 @@ public class ParkingApplicationServiceTest {
         ParkingManager parkingManager = new ParkingManager(parkingBoys);
 
         when(parkingManagerFactory.createParkingManager(any())).thenReturn(parkingManager);
+        Mockito.doNothing().when(parkingLotRepository).updateParkingLot(any());
+
         Car car = new Car(new CarId("粤B000TA"));
         Ticket ticket = parkingApplicationService.parkWithParkingManager(car);
         assertEquals("粤B000TA", ticket.getCarId().getValue());
