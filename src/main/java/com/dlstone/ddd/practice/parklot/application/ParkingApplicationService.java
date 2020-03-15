@@ -5,6 +5,7 @@ import com.dlstone.ddd.practice.parklot.domain.model.config.ParkingManagerId;
 import com.dlstone.ddd.practice.parklot.domain.model.parking.*;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ParkingApplicationService {
 
@@ -21,6 +22,9 @@ public class ParkingApplicationService {
     public Ticket parkWithParkingBoy(ParkingBoyId parkingBoyId, Car car) {
         ParkingBoy parkingBoy = parkingBoyFactory.createParkingBoy(parkingBoyId);
         ParkingLot parkingLot = parkingBoy.selectParkingLot();
+        if (Objects.isNull(parkingLot)) {
+            return null;
+        }
         Ticket ticket = parkingLot.park(car);
         parkingLotRepository.updateParkingLot(parkingLot);
         return ticket;
@@ -29,6 +33,9 @@ public class ParkingApplicationService {
     public Ticket parkWithParkingManager(Car car) {
         ParkingManager parkingManager = parkingManagerFactory.createParkingManager(new ParkingManagerId("manager1"));
         ParkingLot parkingLot = parkingManager.selectParkingLot();
+        if (Objects.isNull(parkingLot)) {
+            return null;
+        }
         Ticket ticket = parkingLot.park(car);
         parkingLotRepository.updateParkingLot(parkingLot);
         return ticket;
