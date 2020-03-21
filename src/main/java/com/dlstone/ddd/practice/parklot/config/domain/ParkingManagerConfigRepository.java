@@ -1,4 +1,4 @@
-package com.dlstone.ddd.practice.parklot.domain.model.config;
+package com.dlstone.ddd.practice.parklot.config.domain;
 
 public interface ParkingManagerConfigRepository {
     ParkingManagerConfig getParkingManagerConfig(ParkingManagerId id);

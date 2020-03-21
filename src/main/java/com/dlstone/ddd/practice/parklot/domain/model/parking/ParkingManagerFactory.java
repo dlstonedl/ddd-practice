@@ -1,8 +1,8 @@
 package com.dlstone.ddd.practice.parklot.domain.model.parking;
 
-import com.dlstone.ddd.practice.parklot.domain.model.config.ParkingManagerConfig;
-import com.dlstone.ddd.practice.parklot.domain.model.config.ParkingManagerConfigRepository;
-import com.dlstone.ddd.practice.parklot.domain.model.config.ParkingManagerId;
+import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerConfig;
+import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerConfigRepository;
+import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerId;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,9 +1,9 @@
 package com.dlstone.ddd.practice.parklot.domain.model.parking;
 
-import com.dlstone.ddd.practice.parklot.domain.model.config.ParkingBoyId;
-import com.dlstone.ddd.practice.parklot.domain.model.config.ParkingManagerConfig;
-import com.dlstone.ddd.practice.parklot.domain.model.config.ParkingManagerConfigRepository;
-import com.dlstone.ddd.practice.parklot.domain.model.config.ParkingManagerId;
+import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyId;
+import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerConfig;
+import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerConfigRepository;
+import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerId;
 import org.junit.Before;
 import org.junit.Test;
 
