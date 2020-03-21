@@ -1,15 +1,15 @@
-package com.dlstone.ddd.practice.parklot.domain.model.parking;
+package com.dlstone.ddd.practice.parklot.parking.domain;
 
 import java.util.Comparator;
 import java.util.List;
 
-public class SortedStrategy implements Strategy {
+public class MaxIdleStrategy implements Strategy {
 
     @Override
     public ParkingLot selectParkingLot(List<ParkingLot> parkingLots) {
         return parkingLots
             .stream()
-            .sorted(Comparator.comparing(parkingLot -> parkingLot.getId().getValue()))
+            .sorted(Comparator.comparingInt(ParkingLot::availableLots).reversed())
             .findFirst()
             .orElse(null);
     }

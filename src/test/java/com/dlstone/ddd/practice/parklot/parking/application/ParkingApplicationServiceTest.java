@@ -1,8 +1,8 @@
-package com.dlstone.ddd.practice.parklot.domain.model.application;
+package com.dlstone.ddd.practice.parklot.parking.application;
 
 import com.dlstone.ddd.practice.parklot.parking.application.ParkingApplicationService;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyId;
-import com.dlstone.ddd.practice.parklot.domain.model.parking.*;
+import com.dlstone.ddd.practice.parklot.parking.domain.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

@@ -1,6 +1,6 @@
 package com.dlstone.ddd.practice.parklot.config.domain;
 
-import com.dlstone.ddd.practice.parklot.domain.model.parking.ParkingLotId;
+import com.dlstone.ddd.practice.parklot.parking.domain.ParkingLotId;
 import lombok.Data;
 
 import java.util.List;

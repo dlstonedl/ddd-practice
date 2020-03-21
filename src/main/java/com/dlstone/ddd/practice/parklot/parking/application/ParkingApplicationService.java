@@ -2,7 +2,7 @@ package com.dlstone.ddd.practice.parklot.parking.application;
 
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyId;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerId;
-import com.dlstone.ddd.practice.parklot.domain.model.parking.*;
+import com.dlstone.ddd.practice.parklot.parking.domain.*;
 
 import java.util.List;
 import java.util.Objects;
