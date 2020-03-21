@@ -1,8 +1,9 @@
-package com.dlstone.ddd.practice.parklot.parking.domain;
+package com.dlstone.ddd.practice.parklot.parking.domain.policy;
 
 import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLot;
 import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLotId;
 import com.dlstone.ddd.practice.parklot.parking.domain.finder.Strategy;
+import com.dlstone.ddd.practice.parklot.parking.domain.policy.MaxIdleStrategy;
 import org.junit.Test;
 
 import java.util.ArrayList;

@@ -4,13 +4,9 @@ import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyId;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerConfig;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerConfigRepository;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerId;
-import com.dlstone.ddd.practice.parklot.parking.domain.SortedStrategy;
+import com.dlstone.ddd.practice.parklot.parking.domain.policy.SortedStrategy;
 import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLot;
 import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLotId;
-import com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingBoy;
-import com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingBoyFactory;
-import com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingManager;
-import com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingManagerFactory;
 import org.junit.Before;
 import org.junit.Test;
 
