@@ -1,4 +1,4 @@
-package com.dlstone.ddd.practice.parklot.parking.domain;
+package com.dlstone.ddd.practice.parklot.parking.domain.finder;
 
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerConfig;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerConfigRepository;

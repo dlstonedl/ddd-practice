@@ -2,6 +2,7 @@ package com.dlstone.ddd.practice.parklot.parking.domain;
 
 import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLot;
 import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLotId;
+import com.dlstone.ddd.practice.parklot.parking.domain.finder.Strategy;
 import org.junit.Test;
 
 import java.util.ArrayList;
