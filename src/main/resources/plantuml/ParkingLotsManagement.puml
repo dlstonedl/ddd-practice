@@ -1,36 +1,100 @@
 @startuml
 
-package config {
-  class ParkingManagerConfig <<Entity>> <<Aggregate Root>> {
+namespace config <<Config SubDomain>> <<ConfigContext>> {
+  class ParkingManager <<Entity>> <<Aggregate Root>> {
      ParkingManagerId id
      List<ParkingBoyId> parkingBoyIds
   }
-
-  ParkingManagerConfig --[hidden] ParkingLotConfig
-
-  class ParkingLotConfig <<Entity>> <<Aggregate Root>> {
+  class ParkingBoy <<Entity>> <<Aggregate Root>> {
     ParkingBoyId id
     List<ParkingLotId> parkingLotIds
     ParkingStrategyName parkingStrategyName
   }
-
   enum ParkingStrategyName
-  ParkingLotConfig --> ParkingStrategyName
+  ParkingBoy --> ParkingStrategyName
+
+  ParkingManager --[hidden] ParkingBoy
 }
 
+package parking <<Core Domain>> <<ParkingContext>>{
+  package core <<core>> {
+    interface FindParkingLotService <<Service>>
+    interface ParkingLotFinderSpecification
+    interface ParkingLotFinderFactory
+    interface ParkingLotFinder
+    class ParkingLot
+    Class Ticket <<Value Object>>
+    class Car <<Value Object>>
 
-package parking {
+    FindParkingLotService .down.> ParkingLotFinderSpecification
+    ParkingLotFinderFactory .down.> ParkingLotFinder
+    ParkingLot "1" o-down-> "many" Ticket
+    Ticket "1" -right-> "1" Car
+
+    FindParkingLotService  -[hidden]right-  ParkingLotFinderFactory
+    ParkingLotFinderFactory -[hidden]right- ParkingLot
+  }
+
+  package finder {
+    class ParkingManager
+    class ParkingBoy
+    class ParkingManagerSpecification
+    class ParkingBoySpecification
+    interface Strategy
+
+    ParkingManager ..up|> ParkingLotFinder
+    ParkingBoy ..up|> ParkingLotFinder
+
+    ParkingManager  "1" o--right> "many" ParkingBoy
+    ParkingBoy -down-> Strategy
+
+    ParkingManagerSpecification ..up|> ParkingLotFinderSpecification
+    ParkingBoySpecification ..up|> ParkingLotFinderSpecification
+
+    config.ParkingBoy ..left> ParkingBoy :"         translate\n        parkingManager类似 "
+  }
+
+  package policy {
+    class SortedStrategy
+    class MaxIdleStrategy
+
+    SortedStrategy ..up|> Strategy
+    MaxIdleStrategy ..up|> Strategy
+  }
+
+  interface FindParkingLotService {
+      ParkingLot findParkingLot(ParkingLotFinderSpecification)
+  }
+
+  interface ParkingLotFinderFactory {
+    ParkingLotFinder newParkingManager()
+    ParkingLotFinder newParkingBoy(ParkingBoyId)
+  }
+
+  interface ParkingLotFinder {
+    ParkingLot findParkingLotToPark()
+  }
+
+  class ParkingLot <<Entity>> <<Aggregate Root>> {
+      ParkingLotId id
+      int capacity
+      Map <Ticket, Car> parkedCars
+
+      + Ticket park(Car car)
+      + Car take(Ticket ticket)
+      int availableLots()
+  }
+
+  Class Car {
+    CardId id
+  }
+
   class ParkingManager <<Value Object>> {
     List<ParkingBoy> parkingBoys
 
     + ParkingLot selectParkingLot()
     + List<ParkingLot> getAvailableParkingLots()
   }
-  ParkingManagerConfig .> ParkingManager
-  note top on link
-    translate
-  end note
-  ParkingManager  "1" o--> "many" ParkingBoy
 
   class ParkingBoy <<Value Object>> {
     List<ParkingLot> parkingLots
@@ -41,39 +105,9 @@ package parking {
     boolean available()
 
   }
-  ParkingLotConfig .> ParkingBoy
-  note top on link
-    translate
-  end note
 
   interface Strategy {
     ParkingLot selectParkingLot(List<ParkingLot> parkingLots)
   }
-  class SortedStrategy
-  class MaxIdleStrategy
-  Strategy <|.. SortedStrategy
-  Strategy <|.. MaxIdleStrategy
-  ParkingBoy -> Strategy
-
-  class ParkingLot <<Entity>> <<Aggregate Root>> {
-    ParkingLotId id
-    int capacity
-    Map <Ticket, Car> parkedCars
-
-    + Ticket park(Car car)
-    + Car take(Ticket ticket)
-    int availableLots()
-  }
-
-  Class Car <<Value Object>> {
-      CarId id
-  }
-
-  Class Ticket <<Value Object>> {
-  }
-
-  Ticket "1" --> "1" Car
-  ParkingLot "1" o--> "many" Ticket
-  ParkingBoy "1" o--> "many" ParkingLot
 }
 @enduml
