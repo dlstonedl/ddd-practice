@@ -1,6 +1,6 @@
-package com.dlstone.ddd.practice.parklot.parking.domain;
+package com.dlstone.ddd.practice.parklot.parking.domain.core;
 
-import com.dlstone.ddd.practice.parklot.parking.domain.*;
+import com.dlstone.ddd.practice.parklot.parking.domain.core.*;
 import org.junit.Test;
 
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.dlstone.ddd.practice.parklot.parking.domain;
+package com.dlstone.ddd.practice.parklot.parking.domain.core;
 
 import lombok.Data;
 
@@ -37,7 +37,7 @@ public class ParkingLot {
         return ticketCarMap.containsKey(ticket);
     }
 
-    int availableLots() {
+    public int availableLots() {
         return capacity - ticketCarMap.size();
     }
 }

@@ -4,7 +4,8 @@ import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyId;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerConfig;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerConfigRepository;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerId;
-import com.dlstone.ddd.practice.parklot.parking.domain.*;
+import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLot;
+import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLotId;
 import org.junit.Before;
 import org.junit.Test;
 

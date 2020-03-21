@@ -1,4 +1,4 @@
-package com.dlstone.ddd.practice.parklot.parking.domain;
+package com.dlstone.ddd.practice.parklot.parking.domain.core;
 
 import java.util.List;
 

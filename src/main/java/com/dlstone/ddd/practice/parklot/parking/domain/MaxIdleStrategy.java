@@ -1,5 +1,7 @@
 package com.dlstone.ddd.practice.parklot.parking.domain;
 
+import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLot;
+
 import java.util.Comparator;
 import java.util.List;
 

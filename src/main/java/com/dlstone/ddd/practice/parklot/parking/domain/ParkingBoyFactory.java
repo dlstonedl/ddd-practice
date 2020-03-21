@@ -4,6 +4,9 @@ import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyConfig;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyId;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyConfigRepository;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingStrategyName;
+import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLot;
+import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLotId;
+import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLotRepository;
 
 import java.util.List;
 
