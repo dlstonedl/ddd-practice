@@ -1,4 +1,4 @@
-package com.dlstone.ddd.practice.parklot.application;
+package com.dlstone.ddd.practice.parklot.parking.application;
 
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyId;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerId;

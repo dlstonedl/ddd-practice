@@ -1,6 +1,6 @@
 package com.dlstone.ddd.practice.parklot.domain.model.application;
 
-import com.dlstone.ddd.practice.parklot.application.ParkingApplicationService;
+import com.dlstone.ddd.practice.parklot.parking.application.ParkingApplicationService;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyId;
 import com.dlstone.ddd.practice.parklot.domain.model.parking.*;
 import org.junit.Before;
