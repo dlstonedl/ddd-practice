@@ -1,8 +1,8 @@
 package com.dlstone.ddd.practice.parklot.parking.domain.finder;
 
-import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyConfig;
+import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoy;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyId;
-import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyConfigRepository;
+import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyRepository;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingStrategyName;
 import com.dlstone.ddd.practice.parklot.parking.domain.policy.MaxIdleStrategy;
 import com.dlstone.ddd.practice.parklot.parking.domain.policy.SortedStrategy;
@@ -14,23 +14,23 @@ import java.util.List;
 
 public class ParkingBoyFactory {
 
-    private ParkingBoyConfigRepository parkingBoyConfigRepository;
+    private ParkingBoyRepository parkingBoyRepository;
     private ParkingLotRepository parkingLotRepository;
 
-    public ParkingBoyFactory(ParkingBoyConfigRepository parkingBoyConfigRepository, ParkingLotRepository parkingLotRepository) {
-        this.parkingBoyConfigRepository = parkingBoyConfigRepository;
+    public ParkingBoyFactory(ParkingBoyRepository parkingBoyRepository, ParkingLotRepository parkingLotRepository) {
+        this.parkingBoyRepository = parkingBoyRepository;
         this.parkingLotRepository = parkingLotRepository;
     }
 
-    public ParkingBoy createParkingBoy(ParkingBoyId parkingBoyId) {
-        ParkingBoyConfig parkingBoyConfig = parkingBoyConfigRepository.getParkingBoyConfig(parkingBoyId);
-        return translateParkingBoyConfigToParkingBoy(parkingBoyConfig);
+    public com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingBoy createParkingBoy(ParkingBoyId parkingBoyId) {
+        ParkingBoy parkingBoy = parkingBoyRepository.getParkingBoy(parkingBoyId);
+        return translateParkingBoyConfigToParkingBoy(parkingBoy);
     }
 
-    private ParkingBoy translateParkingBoyConfigToParkingBoy(ParkingBoyConfig parkingBoyConfig) {
-        List<ParkingLot> parkingLots = createParkingLots(parkingBoyConfig.getParkingLotIds());
-        Strategy strategy = createParkingStrategy(parkingBoyConfig.getParkingStrategyName());
-        return new ParkingBoy(parkingLots, strategy);
+    private com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingBoy translateParkingBoyConfigToParkingBoy(ParkingBoy parkingBoy) {
+        List<ParkingLot> parkingLots = createParkingLots(parkingBoy.getParkingLotIds());
+        Strategy strategy = createParkingStrategy(parkingBoy.getParkingStrategyName());
+        return new com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingBoy(parkingLots, strategy);
     }
 
     private Strategy createParkingStrategy(ParkingStrategyName parkingStrategyName) {

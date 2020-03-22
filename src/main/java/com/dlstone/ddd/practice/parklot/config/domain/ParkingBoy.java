@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ParkingBoyConfig {
+public class ParkingBoy {
     private final ParkingBoyId id;
     private List<ParkingLotId> parkingLotIds;
     private ParkingStrategyName parkingStrategyName;
