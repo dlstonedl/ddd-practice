@@ -6,9 +6,5 @@ public interface ParkingLotRepository {
 
     List<ParkingLot> getParkingLots(List<ParkingLotId> id);
 
-    void addParkingLot(ParkingLot parkingLot);
-
-    void removeParkingLot(ParkingLot parkingLot);
-
-    void updateParkingLot(ParkingLot parkingLot);
+    void save(ParkingLot parkingLot);
 }

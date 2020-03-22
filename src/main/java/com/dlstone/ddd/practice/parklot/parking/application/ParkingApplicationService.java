@@ -22,7 +22,7 @@ public class ParkingApplicationService {
             return null;
         }
         Ticket ticket = parkingLot.park(car);
-        parkingLotRepository.updateParkingLot(parkingLot);
+        parkingLotRepository.save(parkingLot);
         return ticket;
     }
 
@@ -33,7 +33,7 @@ public class ParkingApplicationService {
             return null;
         }
         Ticket ticket = parkingLot.park(car);
-        parkingLotRepository.updateParkingLot(parkingLot);
+        parkingLotRepository.save(parkingLot);
         return ticket;
     }
 

@@ -32,7 +32,7 @@ public class ParkingApplicationServiceTest {
     public void should_return_ticket_when_user_select_one_parking_boy_to_park() {
         ParkingLot parkingLot = new ParkingLot(new ParkingLotId("lot1"), 1);
         when(findParkingLotService.findParkingLot(any())).thenReturn(parkingLot);
-        Mockito.doNothing().when(parkingLotRepository).updateParkingLot(any());
+        Mockito.doNothing().when(parkingLotRepository).save(any());
 
         Car car = new Car(new CarId("粤B000TA"));
         Ticket ticket = parkingApplicationService.parkWithParkingBoy("boy1", car);
@@ -44,7 +44,7 @@ public class ParkingApplicationServiceTest {
     public void should_return_ticket_when_user_select_parking_manager_to_park() {
         ParkingLot parkingLot = new ParkingLot(new ParkingLotId("lot1"), 1);
         when(findParkingLotService.findParkingLot(any())).thenReturn(parkingLot);
-        Mockito.doNothing().when(parkingLotRepository).updateParkingLot(any());
+        Mockito.doNothing().when(parkingLotRepository).save(any());
 
         Car car = new Car(new CarId("粤B000TA"));
         Ticket ticket = parkingApplicationService.parkWithParkingManager(car);
