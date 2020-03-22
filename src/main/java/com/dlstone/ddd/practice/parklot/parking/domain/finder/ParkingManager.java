@@ -21,6 +21,7 @@ public class ParkingManager implements ParkingLotFinder {
             .orElse(null);
     }
 
+    @Override
     public List<ParkingLot> getAvailableParkingLots() {
         return this.parkingBoys
             .stream()

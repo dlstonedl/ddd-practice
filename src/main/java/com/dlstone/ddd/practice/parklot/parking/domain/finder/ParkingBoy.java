@@ -21,14 +21,7 @@ public class ParkingBoy implements ParkingLotFinder {
         return strategy.selectParkingLot(availableParkingLots);
     }
 
-    boolean available() {
-        return this.parkingLots
-            .stream()
-            .filter(parkingLot -> parkingLot.availableLots() > 0)
-            .findAny()
-            .isPresent();
-    }
-
+    @Override
     public List<ParkingLot> getAvailableParkingLots() {
         return this.parkingLots
             .stream()
@@ -36,4 +29,11 @@ public class ParkingBoy implements ParkingLotFinder {
             .collect(Collectors.toList());
     }
 
+    boolean available() {
+        return this.parkingLots
+            .stream()
+            .filter(parkingLot -> parkingLot.availableLots() > 0)
+            .findAny()
+            .isPresent();
+    }
 }

@@ -2,8 +2,6 @@ package com.dlstone.ddd.practice.parklot.parking.application;
 
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyId;
 import com.dlstone.ddd.practice.parklot.parking.domain.core.*;
-import com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingBoy;
-import com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingManager;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -16,8 +14,8 @@ public class ParkingApplicationService {
     private ParkingLotFinderFactory parkingLotFinderFactory;
 
     public Ticket parkWithParkingBoy(ParkingBoyId parkingBoyId, Car car) {
-        ParkingBoy parkingBoy = (ParkingBoy) parkingLotFinderFactory.newParkingBoy(parkingBoyId);
-        ParkingLot parkingLot = parkingBoy.findParkingLotToPark();
+        ParkingLotFinder parkingLotFinder = parkingLotFinderFactory.newParkingBoy(parkingBoyId);
+        ParkingLot parkingLot = parkingLotFinder.findParkingLotToPark();
         if (Objects.isNull(parkingLot)) {
             return null;
         }
@@ -27,8 +25,8 @@ public class ParkingApplicationService {
     }
 
     public Ticket parkWithParkingManager(Car car) {
-        ParkingManager parkingManager = (ParkingManager) parkingLotFinderFactory.newParkingManager();
-        ParkingLot parkingLot = parkingManager.findParkingLotToPark();
+        ParkingLotFinder parkingLotFinder = parkingLotFinderFactory.newParkingManager();
+        ParkingLot parkingLot = parkingLotFinder.findParkingLotToPark();
         if (Objects.isNull(parkingLot)) {
             return null;
         }
@@ -38,7 +36,7 @@ public class ParkingApplicationService {
     }
 
     public List<ParkingLot> getAvailableParkingLotsFromParkingManager() {
-        ParkingManager parkingManager = (ParkingManager) parkingLotFinderFactory.newParkingManager();
-        return parkingManager.getAvailableParkingLots();
+        ParkingLotFinder parkingLotFinder = parkingLotFinderFactory.newParkingManager();
+        return parkingLotFinder.getAvailableParkingLots();
     }
 }

@@ -73,6 +73,7 @@ package parking <<Core Domain>> <<ParkingContext>>{
 
   interface ParkingLotFinder {
     ParkingLot findParkingLotToPark()
+    List<ParkingLot> getAvailableParkingLots()
   }
 
   class ParkingLot <<Entity>> <<Aggregate Root>> {
@@ -91,19 +92,10 @@ package parking <<Core Domain>> <<ParkingContext>>{
 
   class ParkingManager <<Value Object>> {
     List<ParkingBoy> parkingBoys
-
-    + ParkingLot selectParkingLot()
-    + List<ParkingLot> getAvailableParkingLots()
   }
 
   class ParkingBoy <<Value Object>> {
     List<ParkingLot> parkingLots
-
-    + ParkingLot selectParkingLot()
-    + List<ParkingLot> getAvailableParkingLots()
-
-    boolean available()
-
   }
 
   interface Strategy {
