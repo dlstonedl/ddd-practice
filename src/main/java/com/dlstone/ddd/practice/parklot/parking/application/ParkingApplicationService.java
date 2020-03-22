@@ -13,9 +13,11 @@ public class ParkingApplicationService {
 
     private ParkingLotRepository parkingLotRepository;
     private FindParkingLotService findParkingLotService;
+    private ParkingLotFinderFactory parkingLotFinderFactory;
 
     public Ticket parkWithParkingBoy(String parkingBoyId, Car car) {
-        ParkingLot parkingLot = findParkingLotService.findParkingLot(new ParkingBoySpecification(parkingBoyId));
+        ParkingBoySpecification parkingLotFinderSpecification = new ParkingBoySpecification(parkingLotFinderFactory, parkingBoyId);
+        ParkingLot parkingLot = findParkingLotService.findParkingLot(parkingLotFinderSpecification);
         if (Objects.isNull(parkingLot)) {
             return null;
         }
@@ -25,7 +27,8 @@ public class ParkingApplicationService {
     }
 
     public Ticket parkWithParkingManager(Car car) {
-        ParkingLot parkingLot = findParkingLotService.findParkingLot(new ParkingManagerSpecification());
+        ParkingManagerSpecification parkingLotFinderSpecification = new ParkingManagerSpecification(parkingLotFinderFactory);
+        ParkingLot parkingLot = findParkingLotService.findParkingLot(parkingLotFinderSpecification);
         if (Objects.isNull(parkingLot)) {
             return null;
         }
@@ -35,6 +38,7 @@ public class ParkingApplicationService {
     }
 
     public List<ParkingLot> getAvailableParkingLotsFromParkingManager() {
-        return findParkingLotService.findAvailableParkingLots(new ParkingManagerSpecification());
+        ParkingManagerSpecification parkingLotFinderSpecification = new ParkingManagerSpecification(parkingLotFinderFactory);
+        return findParkingLotService.findAvailableParkingLots(parkingLotFinderSpecification);
     }
 }

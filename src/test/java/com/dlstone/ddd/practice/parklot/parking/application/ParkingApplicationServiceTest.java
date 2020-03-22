@@ -1,9 +1,6 @@
 package com.dlstone.ddd.practice.parklot.parking.application;
 
 import com.dlstone.ddd.practice.parklot.parking.domain.core.*;
-import com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingBoy;
-import com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingManager;
-import com.dlstone.ddd.practice.parklot.parking.domain.policy.SortedStrategy;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -21,12 +18,14 @@ public class ParkingApplicationServiceTest {
     private ParkingApplicationService parkingApplicationService;
     private ParkingLotRepository parkingLotRepository;
     private FindParkingLotService findParkingLotService;
+    private ParkingLotFinderFactory parkingLotFinderFactory;
 
     @Before
     public void setUp() {
         findParkingLotService = mock(FindParkingLotService.class);
         parkingLotRepository = mock(ParkingLotRepository.class);
-        parkingApplicationService = new ParkingApplicationService(parkingLotRepository, findParkingLotService);
+        parkingLotFinderFactory = mock(ParkingLotFinderFactory.class);
+        parkingApplicationService = new ParkingApplicationService(parkingLotRepository, findParkingLotService, parkingLotFinderFactory);
     }
 
     @Test
