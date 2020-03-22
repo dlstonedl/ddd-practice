@@ -1,6 +1,5 @@
 package com.dlstone.ddd.practice.parklot.parking.application;
 
-import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyId;
 import com.dlstone.ddd.practice.parklot.parking.domain.core.*;
 import lombok.AllArgsConstructor;
 
@@ -13,7 +12,7 @@ public class ParkingApplicationService {
     private ParkingLotRepository parkingLotRepository;
     private ParkingLotFinderFactory parkingLotFinderFactory;
 
-    public Ticket parkWithParkingBoy(ParkingBoyId parkingBoyId, Car car) {
+    public Ticket parkWithParkingBoy(String parkingBoyId, Car car) {
         ParkingLotFinder parkingLotFinder = parkingLotFinderFactory.newParkingBoy(parkingBoyId);
         ParkingLot parkingLot = parkingLotFinder.findParkingLotToPark();
         if (Objects.isNull(parkingLot)) {

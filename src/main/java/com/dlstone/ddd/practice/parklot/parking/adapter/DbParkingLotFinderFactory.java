@@ -29,7 +29,7 @@ public class DbParkingLotFinderFactory implements ParkingLotFinderFactory {
 
         List<ParkingBoy> parkingBoys = parkingManager.getParkingBoyIds()
             .stream()
-            .map(this::newParkingBoy)
+            .map(parkingBoyId -> this.newParkingBoy(parkingBoyId.getValue()))
             .map(parkingLotFinder -> (ParkingBoy) parkingLotFinder)
             .collect(Collectors.toList());
 
@@ -37,8 +37,8 @@ public class DbParkingLotFinderFactory implements ParkingLotFinderFactory {
     }
 
     @Override
-    public ParkingLotFinder newParkingBoy(ParkingBoyId parkingBoyId) {
-        com.dlstone.ddd.practice.parklot.config.domain.ParkingBoy parkingBoy = parkingConfigApplicationService.getParkingBoy(parkingBoyId);
+    public ParkingLotFinder newParkingBoy(String parkingBoyId) {
+        com.dlstone.ddd.practice.parklot.config.domain.ParkingBoy parkingBoy = parkingConfigApplicationService.getParkingBoy(new ParkingBoyId(parkingBoyId));
 
         List<ParkingLot> parkingLots = parkingLotRepository.getParkingLots(parkingBoy.getParkingLotIds());
         Strategy strategy = parkingBoy.getParkingStrategyName() == ParkingStrategyName.SORTED ? new SortedStrategy() : new MaxIdleStrategy();

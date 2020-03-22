@@ -1,6 +1,5 @@
 package com.dlstone.ddd.practice.parklot.parking.application;
 
-import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyId;
 import com.dlstone.ddd.practice.parklot.parking.domain.core.*;
 import com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingBoy;
 import com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingManager;
@@ -40,7 +39,7 @@ public class ParkingApplicationServiceTest {
         Mockito.doNothing().when(parkingLotRepository).updateParkingLot(any());
 
         Car car = new Car(new CarId("粤B000TA"));
-        Ticket ticket = parkingApplicationService.parkWithParkingBoy(new ParkingBoyId("boy1"), car);
+        Ticket ticket = parkingApplicationService.parkWithParkingBoy("boy1", car);
         assertEquals("粤B000TA", ticket.getCarId().getValue());
         assertEquals("lot1", ticket.getParkingLotId().getValue());
     }

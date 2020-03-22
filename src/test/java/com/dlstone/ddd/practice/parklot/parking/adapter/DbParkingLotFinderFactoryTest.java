@@ -57,7 +57,7 @@ public class DbParkingLotFinderFactoryTest {
         ParkingLot parkingLot = new ParkingLot(new ParkingLotId("lot1"), 1);
         when(parkingLotRepository.getParkingLots(any())).thenReturn(Arrays.asList(parkingLot));
 
-        ParkingLotFinder parkingLotFinder = dbParkingLotFinderFactory.newParkingBoy(BOY_ID);
+        ParkingLotFinder parkingLotFinder = dbParkingLotFinderFactory.newParkingBoy(BOY_ID.getValue());
         assertNotNull(parkingLotFinder);
     }
 
