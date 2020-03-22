@@ -1,9 +1,18 @@
 package com.dlstone.ddd.practice.parklot.config.application;
 
-import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyRepository;
-import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerRepository;
+import com.dlstone.ddd.practice.parklot.config.domain.*;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class ParkingConfigApplicationService {
-    private ParkingBoyRepository parkingBoyRepository;
     private ParkingManagerRepository parkingManagerRepository;
+    private ParkingBoyRepository parkingBoyRepository;
+
+    public ParkingManager getParkingManager() {
+        return parkingManagerRepository.getParkingManager();
+    }
+
+    public ParkingBoy getParkingBoy(ParkingBoyId parkingBoyId){
+        return parkingBoyRepository.getParkingBoy(parkingBoyId);
+    }
 }

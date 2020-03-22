@@ -1,13 +1,14 @@
 package com.dlstone.ddd.practice.parklot.parking.domain.finder;
 
 import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLot;
+import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLotFinder;
 import lombok.Value;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Value
-public class ParkingBoy {
+public class ParkingBoy implements ParkingLotFinder {
     private final List<ParkingLot> parkingLots;
     private final Strategy strategy;
 
@@ -32,5 +33,10 @@ public class ParkingBoy {
             .stream()
             .filter(parkingLot -> parkingLot.availableLots() > 0)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public ParkingLot findParkingLotToPark() {
+        return null;
     }
 }
