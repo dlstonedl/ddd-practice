@@ -1,7 +1,7 @@
 package com.dlstone.ddd.practice.parklot.parking.domain.finder;
 
-import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerConfig;
-import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerConfigRepository;
+import com.dlstone.ddd.practice.parklot.config.domain.ParkingManager;
+import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerRepository;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerId;
 
 import java.util.List;
@@ -9,24 +9,24 @@ import java.util.stream.Collectors;
 
 public class ParkingManagerFactory {
 
-    private ParkingManagerConfigRepository parkingManagerConfigRepository;
+    private ParkingManagerRepository parkingManagerRepository;
     private ParkingBoyFactory parkingBoyFactory;
 
-    public ParkingManagerFactory(ParkingManagerConfigRepository parkingManagerConfigRepository, ParkingBoyFactory parkingBoyFactory) {
-        this.parkingManagerConfigRepository = parkingManagerConfigRepository;
+    public ParkingManagerFactory(ParkingManagerRepository parkingManagerRepository, ParkingBoyFactory parkingBoyFactory) {
+        this.parkingManagerRepository = parkingManagerRepository;
         this.parkingBoyFactory = parkingBoyFactory;
     }
 
-    public ParkingManager createParkingManager(ParkingManagerId parkingManagerId) {
-        ParkingManagerConfig parkingManagerConfig = parkingManagerConfigRepository.getParkingManagerConfig(parkingManagerId);
-        return translateParkingManagerConfigToParkingManager(parkingManagerConfig);
+    public com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingManager createParkingManager(ParkingManagerId parkingManagerId) {
+        ParkingManager parkingManager = parkingManagerRepository.getParkingManager(parkingManagerId);
+        return translateParkingManagerConfigToParkingManager(parkingManager);
     }
 
-    private ParkingManager translateParkingManagerConfigToParkingManager(ParkingManagerConfig parkingManagerConfig) {
-        List<ParkingBoy> parkingBoys = parkingManagerConfig.getParkingBoyIds()
+    private com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingManager translateParkingManagerConfigToParkingManager(ParkingManager parkingManager) {
+        List<ParkingBoy> parkingBoys = parkingManager.getParkingBoyIds()
             .stream()
             .map(parkingBoyFactory::createParkingBoy)
             .collect(Collectors.toList());
-        return new ParkingManager(parkingBoys);
+        return new com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingManager(parkingBoys);
     }
 }

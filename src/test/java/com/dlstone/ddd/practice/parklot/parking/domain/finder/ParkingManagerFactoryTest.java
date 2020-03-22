@@ -1,8 +1,8 @@
 package com.dlstone.ddd.practice.parklot.parking.domain.finder;
 
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingBoyId;
-import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerConfig;
-import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerConfigRepository;
+import com.dlstone.ddd.practice.parklot.config.domain.ParkingManager;
+import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerRepository;
 import com.dlstone.ddd.practice.parklot.config.domain.ParkingManagerId;
 import com.dlstone.ddd.practice.parklot.parking.domain.policy.SortedStrategy;
 import com.dlstone.ddd.practice.parklot.parking.domain.core.ParkingLot;
@@ -23,20 +23,20 @@ public class ParkingManagerFactoryTest {
 
     private ParkingManagerFactory parkingManagerFactory;
     private ParkingBoyFactory parkingBoyFactory;
-    private ParkingManagerConfigRepository managerConfigRepository;
+    private ParkingManagerRepository managerConfigRepository;
 
     @Before
     public void setup() {
-        managerConfigRepository = mock(ParkingManagerConfigRepository.class);
+        managerConfigRepository = mock(ParkingManagerRepository.class);
         parkingBoyFactory = mock(ParkingBoyFactory.class);
         parkingManagerFactory = new ParkingManagerFactory(managerConfigRepository, parkingBoyFactory);
     }
 
     @Test
     public void should_return_parking_manager() {
-        ParkingManagerConfig parkingManagerConfig = new ParkingManagerConfig(new ParkingManagerId("manager1"));
+        ParkingManager parkingManagerConfig = new ParkingManager(new ParkingManagerId("manager1"));
         parkingManagerConfig.setParkingBoyIds(Arrays.asList(new ParkingBoyId("boy1")));
-        when(managerConfigRepository.getParkingManagerConfig(any())).thenReturn(parkingManagerConfig);
+        when(managerConfigRepository.getParkingManager(any())).thenReturn(parkingManagerConfig);
 
         List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot1 = new ParkingLot(new ParkingLotId("lot1"), 1);
@@ -44,7 +44,7 @@ public class ParkingManagerFactoryTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new SortedStrategy());
         when(parkingBoyFactory.createParkingBoy(any())).thenReturn(parkingBoy);
 
-        ParkingManager parkingManager = parkingManagerFactory.createParkingManager(new ParkingManagerId("manager1"));
+        com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingManager parkingManager = parkingManagerFactory.createParkingManager(new ParkingManagerId("manager1"));
         assertEquals(1, parkingManager.getParkingBoys().size());
         assertEquals(1, parkingManager.getParkingBoys().get(0).getParkingLots().size());
     }
