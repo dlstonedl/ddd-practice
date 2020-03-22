@@ -60,7 +60,7 @@ public class ParkingApplicationServiceTest {
         parkingBoys.add(parkingBoy);
         ParkingManager parkingManager = new ParkingManager(parkingBoys);
 
-        when(parkingManagerFactory.createParkingManager(any())).thenReturn(parkingManager);
+        when(parkingManagerFactory.createParkingManager()).thenReturn(parkingManager);
         Mockito.doNothing().when(parkingLotRepository).updateParkingLot(any());
 
         Car car = new Car(new CarId("粤B000TA"));
@@ -80,7 +80,7 @@ public class ParkingApplicationServiceTest {
         parkingBoys.add(parkingBoy);
         ParkingManager parkingManager = new ParkingManager(parkingBoys);
 
-        when(parkingManagerFactory.createParkingManager(any())).thenReturn(parkingManager);
+        when(parkingManagerFactory.createParkingManager()).thenReturn(parkingManager);
 
         List<ParkingLot> availableParkingLots = parkingApplicationService.getAvailableParkingLotsFromParkingManager();
         assertEquals(1, availableParkingLots.size());

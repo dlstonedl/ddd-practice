@@ -17,8 +17,8 @@ public class ParkingManagerFactory {
         this.parkingBoyFactory = parkingBoyFactory;
     }
 
-    public com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingManager createParkingManager(ParkingManagerId parkingManagerId) {
-        ParkingManager parkingManager = parkingManagerRepository.getParkingManager(parkingManagerId);
+    public com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingManager createParkingManager() {
+        ParkingManager parkingManager = parkingManagerRepository.getParkingManager();
         return translateParkingManagerConfigToParkingManager(parkingManager);
     }
 

@@ -38,7 +38,7 @@ public class ParkingApplicationService {
     }
 
     public Ticket parkWithParkingManager(Car car) {
-        ParkingManager parkingManager = parkingManagerFactory.createParkingManager(new ParkingManagerId("manager1"));
+        ParkingManager parkingManager = parkingManagerFactory.createParkingManager();
         ParkingLot parkingLot = parkingManager.selectParkingLot();
         if (Objects.isNull(parkingLot)) {
             return null;
@@ -49,7 +49,7 @@ public class ParkingApplicationService {
     }
 
     public List<ParkingLot> getAvailableParkingLotsFromParkingManager() {
-        ParkingManager parkingManager = parkingManagerFactory.createParkingManager(new ParkingManagerId("manager1"));
+        ParkingManager parkingManager = parkingManagerFactory.createParkingManager();
         return parkingManager.getAvailableParkingLots();
     }
 }

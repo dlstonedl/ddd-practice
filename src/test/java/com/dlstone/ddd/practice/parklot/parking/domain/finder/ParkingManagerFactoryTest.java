@@ -36,7 +36,7 @@ public class ParkingManagerFactoryTest {
     public void should_return_parking_manager() {
         ParkingManager parkingManagerConfig = new ParkingManager(new ParkingManagerId("manager1"));
         parkingManagerConfig.setParkingBoyIds(Arrays.asList(new ParkingBoyId("boy1")));
-        when(managerConfigRepository.getParkingManager(any())).thenReturn(parkingManagerConfig);
+        when(managerConfigRepository.getParkingManager()).thenReturn(parkingManagerConfig);
 
         List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot1 = new ParkingLot(new ParkingLotId("lot1"), 1);
@@ -44,7 +44,7 @@ public class ParkingManagerFactoryTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new SortedStrategy());
         when(parkingBoyFactory.createParkingBoy(any())).thenReturn(parkingBoy);
 
-        com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingManager parkingManager = parkingManagerFactory.createParkingManager(new ParkingManagerId("manager1"));
+        com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingManager parkingManager = parkingManagerFactory.createParkingManager();
         assertEquals(1, parkingManager.getParkingBoys().size());
         assertEquals(1, parkingManager.getParkingBoys().get(0).getParkingLots().size());
     }
