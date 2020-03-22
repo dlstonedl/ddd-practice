@@ -26,7 +26,7 @@ public class ParkingManagerTest {
         ParkingManager parkingManager = new ParkingManager(parkingBoys);
 
 
-        ParkingLot parkingLot = parkingManager.selectParkingLot();
+        ParkingLot parkingLot = parkingManager.findParkingLotToPark();
         assertEquals(parkingLot1, parkingLot);
     }
 
@@ -45,7 +45,7 @@ public class ParkingManagerTest {
         parkingBoys.add(parkingBoy);
         ParkingManager parkingManager = new ParkingManager(parkingBoys);
 
-        ParkingLot parkingLot = parkingManager.selectParkingLot();
+        ParkingLot parkingLot = parkingManager.findParkingLotToPark();
         assertNull(parkingLot);
     }
 

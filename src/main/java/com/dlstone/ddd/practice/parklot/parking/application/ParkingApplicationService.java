@@ -17,7 +17,7 @@ public class ParkingApplicationService {
 
     public Ticket parkWithParkingBoy(ParkingBoyId parkingBoyId, Car car) {
         ParkingBoy parkingBoy = (ParkingBoy) parkingLotFinderFactory.newParkingBoy(parkingBoyId);
-        ParkingLot parkingLot = parkingBoy.selectParkingLot();
+        ParkingLot parkingLot = parkingBoy.findParkingLotToPark();
         if (Objects.isNull(parkingLot)) {
             return null;
         }
@@ -28,7 +28,7 @@ public class ParkingApplicationService {
 
     public Ticket parkWithParkingManager(Car car) {
         ParkingManager parkingManager = (ParkingManager) parkingLotFinderFactory.newParkingManager();
-        ParkingLot parkingLot = parkingManager.selectParkingLot();
+        ParkingLot parkingLot = parkingManager.findParkingLotToPark();
         if (Objects.isNull(parkingLot)) {
             return null;
         }

@@ -11,12 +11,13 @@ import java.util.stream.Collectors;
 public class ParkingManager implements ParkingLotFinder {
     private final List<ParkingBoy> parkingBoys;
 
-    public ParkingLot selectParkingLot() {
+    @Override
+    public ParkingLot findParkingLotToPark() {
         return parkingBoys
             .stream()
             .filter(ParkingBoy::available)
             .findFirst()
-            .map(parkingBoy -> parkingBoy.selectParkingLot())
+            .map(parkingBoy -> parkingBoy.findParkingLotToPark())
             .orElse(null);
     }
 
@@ -25,10 +26,5 @@ public class ParkingManager implements ParkingLotFinder {
             .stream()
             .flatMap(parkingBoy -> parkingBoy.getAvailableParkingLots().stream())
             .collect(Collectors.toList());
-    }
-
-    @Override
-    public ParkingLot findParkingLotToPark() {
-        return null;
     }
 }

@@ -12,7 +12,8 @@ public class ParkingBoy implements ParkingLotFinder {
     private final List<ParkingLot> parkingLots;
     private final Strategy strategy;
 
-    public ParkingLot selectParkingLot() {
+    @Override
+    public ParkingLot findParkingLotToPark() {
         List<ParkingLot> availableParkingLots = this.parkingLots
             .stream()
             .filter(parkingLot -> parkingLot.availableLots() > 0)
@@ -35,8 +36,4 @@ public class ParkingBoy implements ParkingLotFinder {
             .collect(Collectors.toList());
     }
 
-    @Override
-    public ParkingLot findParkingLotToPark() {
-        return null;
-    }
 }

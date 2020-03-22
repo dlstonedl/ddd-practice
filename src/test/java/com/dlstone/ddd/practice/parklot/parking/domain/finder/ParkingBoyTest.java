@@ -26,7 +26,7 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLot2);
 
         ParkingBoy JuniorParkingBoy = new ParkingBoy(parkingLots, new SortedStrategy());
-        ParkingLot parkingLot = JuniorParkingBoy.selectParkingLot();
+        ParkingLot parkingLot = JuniorParkingBoy.findParkingLotToPark();
         assertEquals(parkingLot2, parkingLot);
     }
 
@@ -39,7 +39,7 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLot2);
 
         ParkingBoy seniorParkingBoy = new ParkingBoy(parkingLots, new MaxIdleStrategy());
-        ParkingLot parkingLot = seniorParkingBoy.selectParkingLot();
+        ParkingLot parkingLot = seniorParkingBoy.findParkingLotToPark();
         assertEquals(parkingLot2, parkingLot);
     }
 
