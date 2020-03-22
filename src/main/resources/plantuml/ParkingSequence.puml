@@ -1,0 +1,22 @@
+@startuml
+
+actor user
+user -> ParkingApplicationService :1.parkWithParkingBoy
+ParkingApplicationService -> ParkingBoySpecification :2.new
+ParkingApplicationService <- ParkingBoySpecification :3.parkingBoySpecification
+ParkingApplicationService -> FindParkingLotService :4.findParkingLot(parkingBoySpecification)
+FindParkingLotService -> ParkingBoySpecification :5.newParkingLotFinder
+ParkingBoySpecification -> ParkingLotFinderFactory :6.newParkingBoy
+ParkingBoySpecification <- ParkingLotFinderFactory :7.parkingLotFinder
+FindParkingLotService <- ParkingBoySpecification :8.parkingLotFinder
+FindParkingLotService -> ParkingLotFinder :9.findParkingLotToPark
+FindParkingLotService <- ParkingLotFinder :10.parkingLot
+ParkingApplicationService <- FindParkingLotService :11.parkingLot
+ParkingApplicationService -> ParkingLot :12.park
+ParkingApplicationService <-  ParkingLot :13.ticket
+ParkingApplicationService -> ParkingLotRepository :14.save
+user <- ParkingApplicationService :15.ticket
+
+
+@enduml
+
