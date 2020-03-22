@@ -1,21 +1,30 @@
 @startuml
 
-actor user
-user -> ParkingApplicationService :1.parkWithParkingBoy
-ParkingApplicationService -> ParkingBoySpecification :2.new
-ParkingApplicationService <- ParkingBoySpecification :3.parkingBoySpecification
-ParkingApplicationService -> FindParkingLotService :4.findParkingLot(parkingBoySpecification)
-FindParkingLotService -> ParkingBoySpecification :5.newParkingLotFinder
-ParkingBoySpecification -> ParkingLotFinderFactory :6.newParkingBoy
-ParkingBoySpecification <- ParkingLotFinderFactory :7.parkingLotFinder
-FindParkingLotService <- ParkingBoySpecification :8.parkingLotFinder
-FindParkingLotService -> ParkingLotFinder :9.findParkingLotToPark
-FindParkingLotService <- ParkingLotFinder :10.parkingLot
-ParkingApplicationService <- FindParkingLotService :11.parkingLot
-ParkingApplicationService -> ParkingLot :12.park
-ParkingApplicationService <-  ParkingLot :13.ticket
-ParkingApplicationService -> ParkingLotRepository :14.save
-user <- ParkingApplicationService :15.ticket
+autonumber "[0]"
+actor user order 1
+participant ParkingApplicationService order 2
+participant FindParkingLotService order 3
+participant ParkingBoySpecification order 4
+participant ParkingLotFinderFactory order 5
+participant ParkingLotFinder order 6
+participant ParkingLot order 7
+participant ParkingLotRepository order 8
+
+user -> ParkingApplicationService :parkWithParkingBoy
+ParkingApplicationService -> ParkingBoySpecification :new
+ParkingApplicationService <- ParkingBoySpecification :parkingBoySpecification
+ParkingApplicationService -> FindParkingLotService :findParkingLot(parkingBoySpecification)
+FindParkingLotService -> ParkingBoySpecification :newParkingLotFinder
+ParkingBoySpecification -> ParkingLotFinderFactory :newParkingBoy
+ParkingBoySpecification <- ParkingLotFinderFactory :parkingLotFinder
+FindParkingLotService <- ParkingBoySpecification :parkingLotFinder
+FindParkingLotService -> ParkingLotFinder :findParkingLotToPark
+FindParkingLotService <- ParkingLotFinder :parkingLot
+ParkingApplicationService <- FindParkingLotService :parkingLot
+ParkingApplicationService -> ParkingLot :park
+ParkingApplicationService <-  ParkingLot :ticket
+ParkingApplicationService -> ParkingLotRepository :save(parkingLot)
+user <- ParkingApplicationService :ticket
 
 
 @enduml
