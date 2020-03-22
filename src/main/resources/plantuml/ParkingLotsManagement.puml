@@ -67,6 +67,10 @@ package parking <<Core Domain>> <<ParkingContext>>{
       List<ParkingLot> findAvailableParkingLots(ParkingLotFinderSpecification)
   }
 
+  interface ParkingLotFinderSpecification {
+    ParkingLotFinder newParkingLotFinder()
+  }
+
   interface ParkingLotFinderFactory {
     ParkingLotFinder newParkingManager()
     ParkingLotFinder newParkingBoy(ParkingBoyId)
