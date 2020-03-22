@@ -1,9 +1,11 @@
 package com.dlstone.ddd.practice.parklot.parking.domain.core;
 
 import com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingBoySpecification;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class FindParkingLotService {
 
     private ParkingLotFinderFactory parkingLotFinderFactory;
