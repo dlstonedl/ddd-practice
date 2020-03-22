@@ -1,6 +1,8 @@
 package com.dlstone.ddd.practice.parklot.parking.application;
 
 import com.dlstone.ddd.practice.parklot.parking.domain.core.*;
+import com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingBoySpecification;
+import com.dlstone.ddd.practice.parklot.parking.domain.finder.ParkingManagerSpecification;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -10,11 +12,10 @@ import java.util.Objects;
 public class ParkingApplicationService {
 
     private ParkingLotRepository parkingLotRepository;
-    private ParkingLotFinderFactory parkingLotFinderFactory;
+    private FindParkingLotService findParkingLotService;
 
     public Ticket parkWithParkingBoy(String parkingBoyId, Car car) {
-        ParkingLotFinder parkingLotFinder = parkingLotFinderFactory.newParkingBoy(parkingBoyId);
-        ParkingLot parkingLot = parkingLotFinder.findParkingLotToPark();
+        ParkingLot parkingLot = findParkingLotService.findParkingLot(new ParkingBoySpecification(parkingBoyId));
         if (Objects.isNull(parkingLot)) {
             return null;
         }
@@ -24,8 +25,7 @@ public class ParkingApplicationService {
     }
 
     public Ticket parkWithParkingManager(Car car) {
-        ParkingLotFinder parkingLotFinder = parkingLotFinderFactory.newParkingManager();
-        ParkingLot parkingLot = parkingLotFinder.findParkingLotToPark();
+        ParkingLot parkingLot = findParkingLotService.findParkingLot(new ParkingManagerSpecification());
         if (Objects.isNull(parkingLot)) {
             return null;
         }
@@ -35,7 +35,6 @@ public class ParkingApplicationService {
     }
 
     public List<ParkingLot> getAvailableParkingLotsFromParkingManager() {
-        ParkingLotFinder parkingLotFinder = parkingLotFinderFactory.newParkingManager();
-        return parkingLotFinder.getAvailableParkingLots();
+        return findParkingLotService.findAvailableParkingLots(new ParkingManagerSpecification());
     }
 }

@@ -20,22 +20,19 @@ public class ParkingApplicationServiceTest {
 
     private ParkingApplicationService parkingApplicationService;
     private ParkingLotRepository parkingLotRepository;
-    private ParkingLotFinderFactory parkingLotFinderFactory;
+    private FindParkingLotService findParkingLotService;
 
     @Before
     public void setUp() {
-        parkingLotFinderFactory = mock(ParkingLotFinderFactory.class);
+        findParkingLotService = mock(FindParkingLotService.class);
         parkingLotRepository = mock(ParkingLotRepository.class);
-        parkingApplicationService = new ParkingApplicationService(parkingLotRepository, parkingLotFinderFactory);
+        parkingApplicationService = new ParkingApplicationService(parkingLotRepository, findParkingLotService);
     }
 
     @Test
     public void should_return_ticket_when_user_select_one_parking_boy_to_park() {
-        List<ParkingLot> parkingLots = new ArrayList<>();
-        ParkingLot parkingLot1 = new ParkingLot(new ParkingLotId("lot1"), 1);
-        parkingLots.add(parkingLot1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new SortedStrategy());
-        when(parkingLotFinderFactory.newParkingBoy(any())).thenReturn(parkingBoy);
+        ParkingLot parkingLot = new ParkingLot(new ParkingLotId("lot1"), 1);
+        when(findParkingLotService.findParkingLot(any())).thenReturn(parkingLot);
         Mockito.doNothing().when(parkingLotRepository).updateParkingLot(any());
 
         Car car = new Car(new CarId("粤B000TA"));
@@ -46,16 +43,8 @@ public class ParkingApplicationServiceTest {
 
     @Test
     public void should_return_ticket_when_user_select_parking_manager_to_park() {
-        List<ParkingLot> parkingLots = new ArrayList<>();
-        ParkingLot parkingLot1 = new ParkingLot(new ParkingLotId("lot1"), 1);
-        parkingLots.add(parkingLot1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new SortedStrategy());
-
-        List<ParkingBoy> parkingBoys = new ArrayList<>();
-        parkingBoys.add(parkingBoy);
-        ParkingManager parkingManager = new ParkingManager(parkingBoys);
-
-        when(parkingLotFinderFactory.newParkingManager()).thenReturn(parkingManager);
+        ParkingLot parkingLot = new ParkingLot(new ParkingLotId("lot1"), 1);
+        when(findParkingLotService.findParkingLot(any())).thenReturn(parkingLot);
         Mockito.doNothing().when(parkingLotRepository).updateParkingLot(any());
 
         Car car = new Car(new CarId("粤B000TA"));
@@ -69,13 +58,8 @@ public class ParkingApplicationServiceTest {
         List<ParkingLot> parkingLots = new ArrayList<>();
         ParkingLot parkingLot1 = new ParkingLot(new ParkingLotId("lot1"), 1);
         parkingLots.add(parkingLot1);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots, new SortedStrategy());
 
-        List<ParkingBoy> parkingBoys = new ArrayList<>();
-        parkingBoys.add(parkingBoy);
-        ParkingManager parkingManager = new ParkingManager(parkingBoys);
-
-        when(parkingLotFinderFactory.newParkingManager()).thenReturn(parkingManager);
+        when(findParkingLotService.findAvailableParkingLots(any())).thenReturn(parkingLots);
 
         List<ParkingLot> availableParkingLots = parkingApplicationService.getAvailableParkingLotsFromParkingManager();
         assertEquals(1, availableParkingLots.size());
